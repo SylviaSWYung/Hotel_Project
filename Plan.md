@@ -55,9 +55,7 @@ Målet med appen er å booke hotellrom for ferie destinasjon i Norges storbyer.
 4. Testing:
 - Kort om hva som skal testes i appen. Merk: i denne delen av prosjektet som går på testing, krever vi at den viktigste funksjonaliteten dekkes av tester, og ønsker derfor at dere tenker over dette allerede nå 
 
-<<<<<<< HEAD
 - Teste om det er mulig å se, endre og slette bestilling. 
-=======
 
 
 Prosjektet er delt opp i følgende deler:
@@ -85,4 +83,3 @@ En fungerende app med:
 - implementert feilhåndtering hensiktsmessig
 - et sett JUnit5-tester som sjekker at funksjonaliteten i appen fungerer som tenkt (minimum 6 tester, hvorav en er fillagring, dokumenter valg)
 - dokumentasjon (hvordan appen fungerer, koden skal dokumenteres, hvordan de tekniske kravene er tilfredsstilt ved bruk av  begreper og terminologi i emnet)
->>>>>>> fd401e5f31f3301b9cbe5a7c880ab57f30ea78c2
