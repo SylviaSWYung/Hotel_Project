@@ -1,4 +1,5 @@
 package Hotelproject;
-public class Hotel {
-    
+public class Hotel extends HotelKjede {
+     
+
 }
