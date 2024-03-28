@@ -1,25 +1,21 @@
 package Hotelproject;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class Room {
+public class RoomT {
 
-    public Room(){
+    public RoomT(){
     }
 
     /*Først hente ut informasjon fra HotelRoom.java
      * @return skal ikke returnere noe. 
      */
 
-    public boolean roomInfo(String chain, String destination, String roomNr) throws IOException{    //Kaster fileNotFoundException for å benytte scanner
+    public boolean roomInfo(String chain, String destination, String roomNr) throws FileNotFoundException{    //Kaster fileNotFoundException for å benytte scanner
         File file = new File("HotelRoom.csv");
         Scanner scanner = new Scanner(file);                                    //Henter info fra HotelRoom.csv, vha Scanner 
-        StringBuilder content = new StringBuilder();
         while(scanner.hasNextLine()){                                           //Benytter en while loop for å hente informasjon fra hver linje
             String[] newRoomListe = scanner.nextLine().split(";");        //Linjen i filen, splitter dette med ; 
 
@@ -33,23 +29,16 @@ public class Room {
                     place.toLowerCase().equals(destination.toLowerCase()) && 
                     room.toLowerCase().equals(roomNr.toLowerCase())){
                     System.out.println("Valgt hotell: " + chain + " sted: "+ destination + " og rom nr: " + roomNr);
-                    if(availability){
+                    if(availability){       //Ta inn isAvailable her? Altså sjekke om d r tilgjengelig, deretter returnere en statement til book()?
                         System.out.println("Rommet er tilgjengelig");
-                        newRoomListe[3] = "false";
-                        String updatedLine = String.join(";", newRoomListe);
-                        content.append(updatedLine).append("\n");
                         break;
                     }else{
                         System.out.println("Rommet er utilgjengelig");
-                        break;
-                    }
+                        break;}
                 }
             }
             //System.out.println(hotelchain + place + room + availability);        //Tester for å sjekke om info fra csv dukker opp
         }
-        FileWriter writer = new FileWriter(file);
-        writer.write(content.toString());
-        writer.close();
         scanner.close();
         return true; //Midlertidig, må fikses eller fjernes 
     }
@@ -67,9 +56,9 @@ public class Room {
 
     }
 
-    public static void main(String[] args) throws IOException{
-        Room room1 = new Room();
-        Room room2 = new Room();
+    public static void main(String[] args) throws FileNotFoundException{
+        RoomT room1 = new RoomT();
+        RoomT room2 = new RoomT();
         room1.roomInfo("Strawberry", "Trondheim", "2");
         room2.roomInfo("Strawberry", "Trondheim", "2");
 

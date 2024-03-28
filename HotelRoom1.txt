@@ -1,4 +1,3 @@
-﻿Hotelchain;Place;Room;Availability
 Scandic;Oslo;1;true
 Scandic;Oslo;2;true
 Scandic;Oslo;3;true
