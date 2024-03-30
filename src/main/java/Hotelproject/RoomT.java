@@ -4,6 +4,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+/*Tanken ligger beskrevet i RoomOri.java. Tanken er å implementere to ulike metoder. En for ¨sjekke" roominfo. 
+ * Den andre er for å benytte en metode available og book. Har en løsning i tunga. Men er usikker... 
+ * 
+ * STATUS: Arbeides
+ */
+
 public class RoomT {
 
     public RoomT(){
@@ -13,8 +19,8 @@ public class RoomT {
      * @return skal ikke returnere noe. 
      */
 
-    public boolean roomInfo(String chain, String destination, String roomNr) throws FileNotFoundException{    //Kaster fileNotFoundException for å benytte scanner
-        File file = new File("HotelRoom.csv");
+    public void roomInfo(String chain, String destination, String roomNr) throws FileNotFoundException{    //Kaster fileNotFoundException for å benytte scanner
+        File file = new File("HotelRoom1.txt");
         Scanner scanner = new Scanner(file);                                    //Henter info fra HotelRoom.csv, vha Scanner 
         while(scanner.hasNextLine()){                                           //Benytter en while loop for å hente informasjon fra hver linje
             String[] newRoomListe = scanner.nextLine().split(";");        //Linjen i filen, splitter dette med ; 
@@ -40,7 +46,7 @@ public class RoomT {
             //System.out.println(hotelchain + place + room + availability);        //Tester for å sjekke om info fra csv dukker opp
         }
         scanner.close();
-        return true; //Midlertidig, må fikses eller fjernes 
+        //return true; //Midlertidig, må fikses eller fjernes 
     }
 
     public boolean isAvailable(){   

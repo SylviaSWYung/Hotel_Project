@@ -1,34 +1,26 @@
 package Hotelproject;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-/*Room versjon 1: Tar inn HotelRoom.csv som en fil, og lese inn hver setning, for så å finne om kjede, destination
- * og roomnr er i csv. Deretter dersom dette er true, redigere den til false. 
+/*Originalt, room.java. Her implementeres ikke endring på csv filen. Tanken er å benytte en annen metode... Men er i tenke fasen. 
  * 
- * Q: Kanskje lage dette på to ulike metoder og ikke en... Evt ikke benytte csv da det kan være vanskelig å redigere. 
- * Men da vil ikke de andre objektene vite at en endring har blitt gjennomført på csv filen. 
- * 
- * Status: ON HOLD - HIATUS 
+ * Status: Skal ikke endres. Går tilbake til denne dersom andre filer har fått større endringer.
  */
 
-public class Room {
+public class RoomOri {
 
-    public Room(){
+    public RoomOri(){
     }
 
     /*Først hente ut informasjon fra HotelRoom.java
      * @return skal ikke returnere noe. 
      */
 
-    public boolean roomInfo(String chain, String destination, String roomNr) throws IOException{    //Kaster fileNotFoundException for å benytte scanner
-        File file = new File("HotelRoom.csv");
+    public void roomInfo(String chain, String destination, String roomNr) throws FileNotFoundException{    //Kaster fileNotFoundException for å benytte scanner
+        File file = new File("HotelRoom1.txt");
         Scanner scanner = new Scanner(file);                                    //Henter info fra HotelRoom.csv, vha Scanner 
-        StringBuilder content = new StringBuilder();
         while(scanner.hasNextLine()){                                           //Benytter en while loop for å hente informasjon fra hver linje
             String[] newRoomListe = scanner.nextLine().split(";");        //Linjen i filen, splitter dette med ; 
 
@@ -42,25 +34,18 @@ public class Room {
                     place.toLowerCase().equals(destination.toLowerCase()) && 
                     room.toLowerCase().equals(roomNr.toLowerCase())){
                     System.out.println("Valgt hotell: " + chain + " sted: "+ destination + " og rom nr: " + roomNr);
-                    if(availability){
+                    if(availability){       //Ta inn isAvailable her? Altså sjekke om d r tilgjengelig, deretter returnere en statement til book()?
                         System.out.println("Rommet er tilgjengelig");
-                        newRoomListe[3] = "false";
-                        String updatedLine = String.join(";", newRoomListe);
-                        content.append(updatedLine).append("\n");
                         break;
                     }else{
                         System.out.println("Rommet er utilgjengelig");
-                        break;
-                    }
+                        break;}
                 }
             }
             //System.out.println(hotelchain + place + room + availability);        //Tester for å sjekke om info fra csv dukker opp
         }
-        FileWriter writer = new FileWriter(file);
-        writer.write(content.toString());
-        writer.close();
         scanner.close();
-        return true; //Midlertidig, må fikses eller fjernes 
+        //return true; //Midlertidig, må fikses eller fjernes 
     }
 
     public boolean isAvailable(){   
@@ -76,9 +61,9 @@ public class Room {
 
     }
 
-    public static void main(String[] args) throws IOException{
-        Room room1 = new Room();
-        Room room2 = new Room();
+    public static void main(String[] args) throws FileNotFoundException{
+        RoomOri room1 = new RoomOri();
+        RoomOri room2 = new RoomOri();
         room1.roomInfo("Strawberry", "Trondheim", "2");
         room2.roomInfo("Strawberry", "Trondheim", "2");
 

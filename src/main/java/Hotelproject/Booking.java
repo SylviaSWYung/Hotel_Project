@@ -2,6 +2,10 @@ package Hotelproject;
 
 import java.util.Date;
 
+/*Tester litt ut mens jeg går gjennom booking.java og room.java.
+ * 
+ * Status: Holder på
+ */
 public class Booking extends Room {
     private Room room;
     private Date startDate, endDate; 
