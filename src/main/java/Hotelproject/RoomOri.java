@@ -18,7 +18,7 @@ public class RoomOri {
      * @return skal ikke returnere noe. 
      */
 
-    public void roomInfo(String chain, String destination, String roomNr) throws FileNotFoundException{    //Kaster fileNotFoundException for å benytte scanner
+    public boolean roomInfo(String chain, String destination, String roomNr) throws FileNotFoundException{    //Kaster fileNotFoundException for å benytte scanner
         File file = new File("HotelRoom1.txt");
         Scanner scanner = new Scanner(file);                                    //Henter info fra HotelRoom.csv, vha Scanner 
         while(scanner.hasNextLine()){                                           //Benytter en while loop for å hente informasjon fra hver linje
@@ -36,6 +36,7 @@ public class RoomOri {
                     System.out.println("Valgt hotell: " + chain + " sted: "+ destination + " og rom nr: " + roomNr);
                     if(availability){       //Ta inn isAvailable her? Altså sjekke om d r tilgjengelig, deretter returnere en statement til book()?
                         System.out.println("Rommet er tilgjengelig");
+                        availability = false;
                         break;
                     }else{
                         System.out.println("Rommet er utilgjengelig");
@@ -45,7 +46,7 @@ public class RoomOri {
             //System.out.println(hotelchain + place + room + availability);        //Tester for å sjekke om info fra csv dukker opp
         }
         scanner.close();
-        //return true; //Midlertidig, må fikses eller fjernes 
+        return true; //Midlertidig, må fikses eller fjernes 
     }
 
     public boolean isAvailable(){   

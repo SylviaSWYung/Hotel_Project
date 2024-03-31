@@ -13,7 +13,7 @@ import java.util.Scanner;
  * Q: Kanskje lage dette på to ulike metoder og ikke en... Evt ikke benytte csv da det kan være vanskelig å redigere. 
  * Men da vil ikke de andre objektene vite at en endring har blitt gjennomført på csv filen. 
  * 
- * Status: ON HOLD - HIATUS 
+ * Status: under arbeid
  */
 
 public class Room {
@@ -25,7 +25,7 @@ public class Room {
      * @return skal ikke returnere noe. 
      */
 
-    public boolean roomInfo(String chain, String destination, String roomNr) throws IOException{    //Kaster fileNotFoundException for å benytte scanner
+    public void roomInfo(String chain, String destination, String roomNr) throws IOException{    //Kaster fileNotFoundException for å benytte scanner
         File file = new File("HotelRoom.csv");
         Scanner scanner = new Scanner(file);                                    //Henter info fra HotelRoom.csv, vha Scanner 
         StringBuilder content = new StringBuilder();
@@ -37,16 +37,18 @@ public class Room {
             String room = newRoomListe[2].trim();
             Boolean availability = Boolean.parseBoolean(newRoomListe[3].trim()); //Endrer til newRoomListe til en boolean
 
-            for(int i = 0; i <= newRoomListe.length; i++){
+            String updatedLine = String.join(";", newRoomListe);
+            content.append(updatedLine).append("\n");
+
+            for(int i = 0; i <= updatedLine.length(); i++){
                 if((hotelchain.toLowerCase().equals(chain.toLowerCase())) && 
                     place.toLowerCase().equals(destination.toLowerCase()) && 
                     room.toLowerCase().equals(roomNr.toLowerCase())){
                     System.out.println("Valgt hotell: " + chain + " sted: "+ destination + " og rom nr: " + roomNr);
                     if(availability){
                         System.out.println("Rommet er tilgjengelig");
-                        newRoomListe[3] = "false";
-                        String updatedLine = String.join(";", newRoomListe);
-                        content.append(updatedLine).append("\n");
+                        //content.delete(16, 21);
+                        //content.insert(16, "false");
                         break;
                     }else{
                         System.out.println("Rommet er utilgjengelig");
@@ -54,13 +56,12 @@ public class Room {
                     }
                 }
             }
-            //System.out.println(hotelchain + place + room + availability);        //Tester for å sjekke om info fra csv dukker opp
+            
         }
         FileWriter writer = new FileWriter(file);
         writer.write(content.toString());
         writer.close();
         scanner.close();
-        return true; //Midlertidig, må fikses eller fjernes 
     }
 
     public boolean isAvailable(){   
