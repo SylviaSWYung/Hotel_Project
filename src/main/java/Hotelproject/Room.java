@@ -13,7 +13,7 @@ import java.util.Scanner;
  * Q: Kanskje lage dette på to ulike metoder og ikke en... Evt ikke benytte csv da det kan være vanskelig å redigere. 
  * Men da vil ikke de andre objektene vite at en endring har blitt gjennomført på csv filen. 
  * 
- * Status: under arbeid
+ * Status: on hold
  */
 
 public class Room {
