@@ -11,7 +11,7 @@ import java.util.Scanner;
 2. Deretter skal man velge om man vil book eller ikke basert på om den er tilgjengelig.
 3. Muligheten til å avbestille. 
 4. Redigere fil
-5. Utløse unntak --> må gjøres ved feil tilstand, eller input.
+5. Utløse unntak --> (påbegynt) må gjøres ved feil tilstand, eller input.
 
 Muligendring: Implementere BookingID?
 Status: Påbegynt
