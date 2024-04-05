@@ -1,0 +1,16 @@
+Scandic;Oslo;1;true
+Scandic;Oslo;2;true
+Scandic;Oslo;3;true
+Scandic;Oslo;4;true
+Scandic;Trondheim;1;true
+Scandic;Trondheim;2;true
+Scandic;Trondheim;3;true
+Scandic;Trondheim;4;true
+Strawberry;Oslo;1;true
+Strawberry;Oslo;2;true
+Strawberry;Oslo;3;true
+Strawberry;Oslo;4;true
+Strawberry;Trondheim;1;true
+Strawberry;Trondheim;2;true
+Strawberry;Trondheim;3;true
+Strawberry;Trondheim;4;true

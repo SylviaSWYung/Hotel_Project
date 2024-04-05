@@ -11,20 +11,19 @@ import java.util.Scanner;
 2. Deretter skal man velge om man vil book eller ikke basert på om den er tilgjengelig.
 3. Muligheten til å avbestille. 
 4. Redigere fil
-5. Utløse unntak --> (påbegynt) må gjøres ved feil tilstand, eller input.
 
 Muligendring: Implementere BookingID?
 Status: Påbegynt
 */
 
-public class Room {
+public class Roomv1 {
     private Scanner scanner; 
     private StringBuilder content;
     private File file; 
     private boolean roomFound;
 
 
-    public Room() throws IOException{
+    public Roomv1() throws IOException{
         this.file = new File("HotelRoom.csv");                      //Henter filen
         this.scanner = new Scanner(file);                                    //Henter info fra HotelRoom.csv, vha Scanner 
         this.content = new StringBuilder();                                  //Benytter Stringbuilder for senere anledning, når vi skal redigere filen. 
