@@ -1,20 +1,119 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="exampleproject.HotelProjectController">
+<AnchorPane fx:id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="499.0" prefWidth="458.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Hotelproject.HotelProjectController">
    <children>
-      <Button layoutX="271.0" layoutY="188.0" mnemonicParsing="false" onAction="#handleButtonClick" text="Kalkuler" />
-      <TextField fx:id="firstNumber" layoutX="107.0" layoutY="133.0" />
-      <TextField fx:id="secondNumber" layoutX="344.0" layoutY="133.0" />
-      <TextField fx:id="operator" layoutX="288.0" layoutY="133.0" prefHeight="25.0" prefWidth="26.0" />
-      <Label fx:id="result" layoutX="257.0" layoutY="244.0" />
-      <Text layoutX="170.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tall 1" />
-      <Text layoutX="405.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tall 2" />
-      <Text layoutX="289.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="+-/*" />
+      <TabPane prefHeight="499.0" prefWidth="458.0" style="-fx-background-color: #FFCDEA;" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Hotel Booking">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: FFCDEA;">
+                     <children>
+                        <Label layoutX="39.0" layoutY="105.0" text="Hotelchain">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="39.0" layoutY="161.0" text="Destination">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="39.0" layoutY="219.0" text="Room Number">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="192.0" layoutY="353.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="74.0" style="-fx-background-color: BC7FCD;" text="Book" />
+                        <Label layoutX="114.0" layoutY="22.0" text="PinkPearl Bookings">
+                           <font>
+                              <Font name="System Bold Italic" size="24.0" />
+                           </font>
+                           <textFill>
+                              <RadialGradient centerX="0.46902655711216207" centerY="0.5227272510528564" radius="0.986238549608703">
+                                 <stops>
+                                    <Stop>
+                                       <color>
+                                          <Color red="0.5898399949073792" green="0.20440000295639038" blue="0.7300000190734863" />
+                                       </color>
+                                    </Stop>
+                                    <Stop offset="1.0">
+                                       <color>
+                                          <Color red="1.0" green="1.0" blue="1.0" />
+                                       </color>
+                                    </Stop>
+                                 </stops>
+                              </RadialGradient>
+                           </textFill>
+                        </Label>
+                        <ChoiceBox fx:id="hotelchainChoiceBox" layoutX="152.0" layoutY="102.0" prefWidth="150.0" />
+                        <ChoiceBox fx:id="destinationChoiceBox" layoutX="152.0" layoutY="159.0" prefWidth="150.0" />
+                        <ChoiceBox fx:id="roomNumberChoiceBox" layoutX="152.0" layoutY="216.0" prefWidth="150.0" />
+                        <Label layoutX="39.0" layoutY="275.0" text="Guest">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="guestTextField" layoutX="153.0" layoutY="272.0" promptText="Guest" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Booking Information">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: FFCDEA;">
+                     <children>
+                        <TextArea fx:id="bookingInformationTextArea" layoutX="14.0" layoutY="14.0" prefHeight="190.0" prefWidth="429.0" promptText="Booking Information here">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </TextArea>
+                        <Button layoutX="144.0" layoutY="260.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="73.0" style="-fx-background-color: BC7FCD;" text="Vipps">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="239.0" layoutY="260.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="73.0" style="-fx-background-color: BC7FCD;" text="Card">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                        <Label layoutX="191.0" layoutY="221.0" text="Payment">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="345.0" layoutY="430.0" mnemonicParsing="false" style="-fx-background-color: BC7FCD;" text="Cancel payment" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="Booking Confirmation">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: FFCDEA;">
+                     <children>
+                        <TextArea fx:id="bookingConfirmationTextArea" layoutX="20.0" layoutY="22.0" prefHeight="429.0" prefWidth="416.0" promptText="Booking Confirmation ">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </TextArea>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
    </children>
 </AnchorPane>

@@ -3,6 +3,7 @@ package Hotelproject;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -18,6 +19,10 @@ Status: Påbegynt
 */
 
 public class Room {
+    public static final List<String> HOTELCHAIN = List.of("Scandic", "Strawberry");
+    public static final List<String> DESTINATION = List.of("Oslo", "Trondheim");
+    public static final List<String> ROOMNUMBER = List.of("1", "2", "3", "4");
+
     private Scanner scanner; 
     private StringBuilder content;
     private File file; 
@@ -29,6 +34,23 @@ public class Room {
         this.scanner = new Scanner(file);                                    //Henter info fra HotelRoom.csv, vha Scanner 
         this.content = new StringBuilder();                                  //Benytter Stringbuilder for senere anledning, når vi skal redigere filen. 
         this.roomFound = false; 
+        
+    }
+
+    public Scanner getScanner(){
+        return scanner;
+    }
+
+    public StringBuilder getContent(){
+        return content;
+    }
+
+    public File getFile(){
+        return file;
+    }
+
+    public boolean getRoomFound(){
+        return roomFound;
     }
 
     //Hovedmetode for booking
