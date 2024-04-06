@@ -84,8 +84,6 @@ public class Room {
                     System.out.println("This room is available.");              //Rommet er tilgjengelig
                     availability = bookOpinion();                                  //Henter mer information fra bookOpinion()
                     if(!availability){                                           //Dersom den er false altså kunde ønsker å booke, gjør så dette
-                        int amountguests = guestAmount();
-                        calculateTotalPrice(price, amountguests);
                         System.out.println("Your room has been successfully booked!");
                     }else{                                                        //Dersom kunde ikke ønsker å booke
                         System.out.println("You did not book this room.");
@@ -114,21 +112,6 @@ public class Room {
         }else{
             return true;
         }
-    }
-
-    //metode for å spørre hvor mange gjester og lagrer det til en variabel for senere bruk
-    public int guestAmount() {
-        System.out.println("Please write the amount of guests from 1-5: "); //må lage unntakstilstand i controller
-        @SuppressWarnings("resource")
-        Scanner scan1 = new Scanner(System.in);
-        int amountguests = Integer.parseInt(scan1.nextLine().trim());
-        return amountguests; 
-    }
-
-    //metode som regner ut total pris på booking
-    public void calculateTotalPrice(int price, int amountguests) {
-        int totalPrice = price * amountguests;
-        System.out.println("Total price for booking: " + totalPrice + " kr.");
     }
 
     //Metode: Sjekke om spesifikk info om hotellet er sant, dermed avbestill. 
