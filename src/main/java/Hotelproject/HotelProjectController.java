@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
+import javafx.util.converter.IntegerStringConverter;
 
 public class HotelProjectController {
     private Room room;
@@ -29,7 +31,7 @@ public class HotelProjectController {
     private TextArea bookingConfirmationTextArea;
 
     @FXML   
-    private void initialize() throws IOException{
+    private <T> void initialize() throws IOException{
         this.room = new Room();
         
         this.hotelchainChoiceBox.getItems().addAll(Room.HOTELCHAIN);
@@ -37,7 +39,27 @@ public class HotelProjectController {
         this.destinationChoiceBox.getItems().addAll(Room.DESTINATION);
 
         this.roomNumberChoiceBox.getItems().addAll(Room.ROOMNUMBER);
+
+        this.guestTextField.setTextFormatter(new TextFormatter<>(new IntegerStringConverter()));
     
     }
+
+    @FXML
+    private void handleBook(){
+        
+    }
+
+    @FXML 
+    private void handleVippsPayment(){
+
+    }
+    
+    @FXML
+    private void handleCardPayment(){
+
+    }
+
+
+    
 
 }
