@@ -1,5 +1,6 @@
 package Hotelproject;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -78,6 +79,4 @@ public class Booking extends Room {
             return null;
         }
     }
-   
-
 }
