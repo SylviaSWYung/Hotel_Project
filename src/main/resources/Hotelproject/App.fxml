@@ -36,7 +36,7 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Button layoutX="192.0" layoutY="353.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="74.0" style="-fx-background-color: BC7FCD;" text="Book" />
+                        <Button layoutX="192.0" layoutY="353.0" mnemonicParsing="false" onAction="#handleBook" prefHeight="50.0" prefWidth="74.0" style="-fx-background-color: BC7FCD;" text="Book" />
                         <Label layoutX="114.0" layoutY="22.0" text="PinkPearl Bookings">
                            <font>
                               <Font name="System Bold Italic" size="24.0" />
@@ -80,12 +80,12 @@
                               <Font size="14.0" />
                            </font>
                         </TextArea>
-                        <Button layoutX="144.0" layoutY="260.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="73.0" style="-fx-background-color: BC7FCD;" text="Vipps">
+                        <Button layoutX="144.0" layoutY="260.0" mnemonicParsing="false" onAction="#handleVippsPayment" prefHeight="43.0" prefWidth="73.0" style="-fx-background-color: BC7FCD;" text="Vipps">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Button>
-                        <Button layoutX="239.0" layoutY="260.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="73.0" style="-fx-background-color: BC7FCD;" text="Card">
+                        <Button layoutX="239.0" layoutY="260.0" mnemonicParsing="false" onAction="#handleCardPayment" prefHeight="43.0" prefWidth="73.0" style="-fx-background-color: BC7FCD;" text="Card">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -95,7 +95,7 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <Button layoutX="345.0" layoutY="430.0" mnemonicParsing="false" style="-fx-background-color: BC7FCD;" text="Cancel payment" />
+                        <Button layoutX="345.0" layoutY="430.0" mnemonicParsing="false" onAction="#handleCancelBooking" style="-fx-background-color: BC7FCD;" text="Cancel payment" />
                      </children>
                   </AnchorPane>
             </content>

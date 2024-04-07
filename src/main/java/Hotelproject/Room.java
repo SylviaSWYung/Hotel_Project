@@ -26,14 +26,14 @@ public class Room {
     private Scanner scanner; 
     private StringBuilder content;
     private File file; 
-    private boolean roomFound;
+    //private boolean roomFound;
 
 
     public Room() throws IOException{
         this.file = new File("HotelRoom.csv");                      //Henter filen
         this.scanner = new Scanner(file);                                    //Henter info fra HotelRoom.csv, vha Scanner 
         this.content = new StringBuilder();                                  //Benytter Stringbuilder for senere anledning, når vi skal redigere filen. 
-        this.roomFound = false; 
+        //this.roomFound = false; 
         
     }
 
@@ -49,9 +49,9 @@ public class Room {
         return file;
     }
 
-    public boolean getRoomFound(){
-        return roomFound;
-    }
+    // public boolean getRoomFound(){
+    //     return roomFound;
+    // }
 
     //Hovedmetode for booking
     public void booking(String chain, String destination, String roomNr) throws IOException{
@@ -67,6 +67,7 @@ public class Room {
 
     /*Metode: Sjekke om spesifikk info om hotellet er tilgjengelig for booking*/
     public StringBuilder checkAvailability(String chain, String destination, String roomNr) throws IOException{    //Kaster fileNotFoundException for å benytte scanner
+        StringBuilder content = new StringBuilder();
         while(scanner.hasNextLine()){                                           //Benytter en while loop for å hente informasjon fra hver linje
             String[] newRoomListe = scanner.nextLine().split(";");        //Linjen i filen, splitter dette med ; 
 
@@ -78,16 +79,16 @@ public class Room {
 
             //Dersom hotelchian = chain, place = destination, room = roomNr. 
             if(hotelchain.equalsIgnoreCase(chain) && place.equalsIgnoreCase(destination) && room.equalsIgnoreCase(roomNr)){
-                roomFound = true;                                                //Funnet spesifikt room, true
+                //roomFound = true;                                                //Funnet spesifikt room, true
                 System.out.println("Booking information:\n Choosen hotel: " + chain + "\n Destination: "+ destination + "\n Room nr: " + roomNr);
                 if (availability) {                                              //Dersom availability som er index 4 i string, er true. Fortsett
                     System.out.println("This room is available.");              //Rommet er tilgjengelig
-                    availability = bookOpinion();                                  //Henter mer information fra bookOpinion()
-                    if(!availability){                                           //Dersom den er false altså kunde ønsker å booke, gjør så dette
+                    availability = false;                                  //Henter mer information fra bookOpinion()
+                    // if(availability){                                           //Dersom den er false altså kunde ønsker å booke, gjør så dette
                         System.out.println("Your room has been successfully booked!");
-                    }else{                                                        //Dersom kunde ikke ønsker å booke
-                        System.out.println("You did not book this room.");
-                    }
+                    // }else{                                                        //Dersom kunde ikke ønsker å booke
+                    //     System.out.println("You did not book this room.");
+                    // }
                 }else{                                                          //Dersom rommet fra før er false. 
                     System.out.println("This room is unavailable. Try another room or date");
                 }
@@ -96,26 +97,27 @@ public class Room {
             String updatedLine = String.join(";", hotelchain, place, room, String.valueOf(availability), price);
             content.append(updatedLine).append("\n");                       //content som er stringbuilder, legg updatedLine med \n inn.
         }
-        roomNotFound();                                                         //Dersom rommet ikke er funnet i HotelRoom.csv.                    
+        //roomNotFound();                                                         //Dersom rommet ikke er funnet i HotelRoom.csv.                    
         scanner.close();
         return content;
     }
 
     //Metode: Implementeres i checkAvailability(). Muligheten til å svare om man ønsker å booke rommet eller ikke.
-    public boolean bookOpinion(){
-        System.out.println("Do you wish to book the room? Yes/No: ");
-        @SuppressWarnings("resource")
-        Scanner scan = new Scanner(System.in);
-        String answer = scan.next().trim().toLowerCase();
-        if(answer.equalsIgnoreCase("yes")){
-            return false;                                                       //Dersom de ønsker å booke, vil tilgjengelig endres til false for neste mann.
-        }else{
-            return true;
-        }
-    }
+    // public boolean bookOpinion(){
+    //     System.out.println("Do you wish to book the room? Yes/No: ");
+    //     @SuppressWarnings("resource")
+    //     Scanner scan = new Scanner(System.in);
+    //     String answer = scan.next().trim().toLowerCase();
+    //     if(answer.equalsIgnoreCase("yes")){
+    //         return false;                                                       //Dersom de ønsker å booke, vil tilgjengelig endres til false for neste mann.
+    //     }else{
+    //         return true;
+    //     }
+    // }
 
     //Metode: Sjekke om spesifikk info om hotellet er sant, dermed avbestill. 
     public StringBuilder checkToCancelBooking(String chain, String destination, String roomNr) throws IOException{
+        StringBuilder content = new StringBuilder();
         while(scanner.hasNextLine()){                                           
             String[] newRoomListe = scanner.nextLine().split(";");        
 
@@ -126,15 +128,15 @@ public class Room {
             String price = newRoomListe[4].trim();
 
             if(hotelchain.equalsIgnoreCase(chain) && place.equalsIgnoreCase(destination) && room.equalsIgnoreCase(roomNr)){
-                roomFound = true; 
+                //roomFound = true; 
                 System.out.println("Booking Information: \n You choose to cancel booking for hotel " + chain + "\nat destination " + destination + "\nwith specific roomnr " + roomNr);
                 if (!availability) {                //Dersom availability fra csv er false --> indikerer at d r booket.
-                    availability = cancelOpinion();
-                    if (availability) {
+                    availability = true;
+                    //if (availability) {
                         System.out.println("Your room has successfully been cancelled.\nWe hope to see you again!");
-                    }else{
-                        System.out.println("You did not cancel your room. \n We are exicted to meet you!");
-                    }
+                    //}else{
+                        //System.out.println("You did not cancel your room. \n We are exicted to meet you!");
+                    //}
                 }else{
                     System.out.println("There is nothing to cancel. Have you registered the right booking ID?"); //Implementere booking id??
                 }
@@ -142,30 +144,30 @@ public class Room {
             String updatedLine = String.join(";", hotelchain, place, room, String.valueOf(availability), price);
             content.append(updatedLine).append("\n");
         }
-        roomNotFound();
+        //roomNotFound();
         scanner.close();
         return content;
     }
 
     //Metode: Implementeres i checkToCancelBooking(). Muligheten til å svare om man ønsker å avbestille rommet eller ikke. 
-    public boolean cancelOpinion(){
-        System.out.println("Do you wish to cancel your room? Yes/No: ");
-        @SuppressWarnings("resource")
-        Scanner scan = new Scanner(System.in);
-        String answer = scan.next().trim().toLowerCase();
-        if(answer.equalsIgnoreCase("yes")){
-            return true;                                                       
-        }else{
-            return false;
-        }
-    }
+    // public boolean cancelOpinion(){
+    //     System.out.println("Do you wish to cancel your room? Yes/No: ");
+    //     @SuppressWarnings("resource")
+    //     Scanner scan = new Scanner(System.in);
+    //     String answer = scan.next().trim().toLowerCase();
+    //     if(answer.equalsIgnoreCase("yes")){
+    //         return true;                                                       
+    //     }else{
+    //         return false;
+    //     }
+    // }
  
     //Metode (generelt): Dersom roomet ikke er funnet. Print rommet ble ikke funnet.  
-    public void roomNotFound(){
-        if(!roomFound){                             
-            System.out.println("Your room couldn't be found!");
-        }
-    }
+    // public void roomNotFound(){
+    //     if(!roomFound){                             
+    //         System.out.println("Your room couldn't be found!");
+    //     }
+    // }
 
     //Metode (generelt): Kode som skriver om alt i csv. 
     public void reWrite(StringBuilder x) throws IOException{
@@ -173,14 +175,15 @@ public class Room {
         writer.write(x.toString());                         //skriv content til string
         writer.close();  
     }
+
     public static void main(String[] args) throws IOException{
-        //Room room1 = new Room();
+        Room room1 = new Room();
         //Room room2 = new Room();
         //Room room3 = new Room();
-        //room1.booking("Strawberry", "Trondheim", "2");
+        room1.booking("Strawberry", "Trondheim", "2");
         //room2.booking("Strawberry", "Trondheim", "2");
         //room3.booking("Scandic", "Trondheim", "3");
-        //room1.cancelBooking("strawberry", "trondheim", "2");
+        //room1.cancelBooking("scandic", "oslo", "4");
 
     }
 
