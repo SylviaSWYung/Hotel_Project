@@ -65,6 +65,22 @@ public class Room {
         reWrite(content);
     }
 
+    //metode for å spørre brukeren hvor mange gjester og lagre til variabel
+    public int guestAmount() {
+        System.out.println("Please write the amount of guests from 1-5: "); 
+        @SuppressWarnings("resource")
+        Scanner scan1 = new Scanner(System.in);
+        int amountguests = Integer.parseInt(scan1.nextLine().trim());
+        return amountguests;
+    }
+
+    //metode for å regne ut total pris på reisen (ganger pris på valgt hotell/rom/sted ganget med antall gjester)
+    public void calculateTotalPrice(int price, int numGuests) throws IOException {
+    int totalPrice = price * numGuests;
+    System.out.println("Total price for booking: " + totalPrice + " kr.");
+    reWrite(content);
+}
+
     /*Metode: Sjekke om spesifikk info om hotellet er tilgjengelig for booking*/
     public StringBuilder checkAvailability(String chain, String destination, String roomNr) throws IOException{    //Kaster fileNotFoundException for å benytte scanner
         StringBuilder content = new StringBuilder();
@@ -75,7 +91,7 @@ public class Room {
             String place = newRoomListe[1].trim();
             String room = newRoomListe[2].trim();
             Boolean availability = Boolean.parseBoolean(newRoomListe[3].trim()); //Endrer til newRoomListe til en boolean
-            String price = newRoomListe[4].trim();
+            int price = Integer.parseInt(newRoomListe[4].trim());
 
             //Dersom hotelchian = chain, place = destination, room = roomNr. 
             if(hotelchain.equalsIgnoreCase(chain) && place.equalsIgnoreCase(destination) && room.equalsIgnoreCase(roomNr)){
@@ -85,6 +101,10 @@ public class Room {
                     System.out.println("This room is available.");              //Rommet er tilgjengelig
                     availability = false;                                  //Henter mer information fra bookOpinion()
                     // if(availability){                                           //Dersom den er false altså kunde ønsker å booke, gjør så dette
+                    availability = bookOpinion();                                  //Henter mer information fra bookOpinion()
+                    if(!availability){                                           //Dersom den er false altså kunde ønsker å booke, gjør så dette
+                        int numGuests = guestAmount();
+                        calculateTotalPrice(price, numGuests);
                         System.out.println("Your room has been successfully booked!");
                     // }else{                                                        //Dersom kunde ikke ønsker å booke
                     //     System.out.println("You did not book this room.");
@@ -94,7 +114,7 @@ public class Room {
                 }
             }
             //ny variabel, alle parameter join sammen med ; i midten, til en string. 
-            String updatedLine = String.join(";", hotelchain, place, room, String.valueOf(availability), price);
+            String updatedLine = String.join(";", hotelchain, place, room, String.valueOf(availability), String.valueOf(price));
             content.append(updatedLine).append("\n");                       //content som er stringbuilder, legg updatedLine med \n inn.
         }
         //roomNotFound();                                                         //Dersom rommet ikke er funnet i HotelRoom.csv.                    
@@ -125,7 +145,7 @@ public class Room {
             String place = newRoomListe[1].trim();
             String room = newRoomListe[2].trim();
             Boolean availability = Boolean.parseBoolean(newRoomListe[3].trim()); 
-            String price = newRoomListe[4].trim();
+            int price = Integer.parseInt(newRoomListe[4].trim());
 
             if(hotelchain.equalsIgnoreCase(chain) && place.equalsIgnoreCase(destination) && room.equalsIgnoreCase(roomNr)){
                 //roomFound = true; 
@@ -141,7 +161,7 @@ public class Room {
                     System.out.println("There is nothing to cancel. Have you registered the right booking ID?"); //Implementere booking id??
                 }
             }
-            String updatedLine = String.join(";", hotelchain, place, room, String.valueOf(availability), price);
+            String updatedLine = String.join(";", hotelchain, place, room, String.valueOf(availability), String.valueOf(price));
             content.append(updatedLine).append("\n");
         }
         //roomNotFound();
@@ -186,6 +206,4 @@ public class Room {
         //room1.cancelBooking("scandic", "oslo", "4");
 
     }
-
-   
 }
