@@ -65,6 +65,22 @@ public class Room {
         reWrite(content);
     }
 
+    //metode for å spørre brukeren hvor mange gjester og lagre til variabel
+    public int guestAmount() {
+        System.out.println("Please write the amount of guests from 1-5: "); 
+        @SuppressWarnings("resource")
+        Scanner scan1 = new Scanner(System.in);
+        int amountguests = Integer.parseInt(scan1.nextLine().trim());
+        return amountguests;
+    }
+
+    //metode for å regne ut total pris på reisen (ganger pris på valgt hotell/rom/sted ganget med antall gjester)
+    public void calculateTotalPrice(int price, int numGuests) throws IOException {
+    int totalPrice = price * numGuests;
+    System.out.println("Total price for booking: " + totalPrice + " kr.");
+    reWrite(content);
+}
+
     /*Metode: Sjekke om spesifikk info om hotellet er tilgjengelig for booking*/
     public StringBuilder checkAvailability(String chain, String destination, String roomNr) throws IOException{    //Kaster fileNotFoundException for å benytte scanner
         while(scanner.hasNextLine()){                                           //Benytter en while loop for å hente informasjon fra hver linje
@@ -84,6 +100,8 @@ public class Room {
                     System.out.println("This room is available.");              //Rommet er tilgjengelig
                     availability = bookOpinion();                                  //Henter mer information fra bookOpinion()
                     if(!availability){                                           //Dersom den er false altså kunde ønsker å booke, gjør så dette
+                        int numGuests = guestAmount();
+                        calculateTotalPrice(price, numGuests);
                         System.out.println("Your room has been successfully booked!");
                     }else{                                                        //Dersom kunde ikke ønsker å booke
                         System.out.println("You did not book this room.");
@@ -183,6 +201,4 @@ public class Room {
         //room1.cancelBooking("strawberry", "trondheim", "2");
 
     }
-
-   
 }
