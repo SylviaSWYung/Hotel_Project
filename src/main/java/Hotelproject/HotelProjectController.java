@@ -1,16 +1,16 @@
 package Hotelproject;
 
 import java.io.IOException;
-import java.time.LocalDate;
+//import java.time.LocalDate;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
+//import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
-import javafx.util.converter.DoubleStringConverter;
+//import javafx.util.converter.DoubleStringConverter;
 import javafx.util.converter.IntegerStringConverter;
 
 public class HotelProjectController {
@@ -69,6 +69,7 @@ public class HotelProjectController {
         String chain = this.hotelchainChoiceBox.getValue();
         String destination = this.destinationChoiceBox.getValue();
         String roomNr = this.roomNumberChoiceBox.getValue();
+        //Integer guestInteger = Integer.parseInt(this.guestTextField.getText());
 
         String wrong = null; 
         if(chain == null){
@@ -77,6 +78,8 @@ public class HotelProjectController {
             wrong = "You have to choose a destination";
         }else if(roomNr == null){
             wrong = "You have to choose a room number";
+        // }else if(guestInteger <= 0){
+        //     wrong = "You have to choose amount of guest!";
         }
 
         if(wrong != null){
@@ -88,6 +91,8 @@ public class HotelProjectController {
             return;
         }
         this.room.booking(chain, destination, roomNr);
+        //this.refreshRoomInfo();
+
     }
 
 
@@ -98,27 +103,6 @@ public class HotelProjectController {
         String roomNr = this.roomNumberChoiceBox.getValue();
 
         this.room.cancelBooking(chain, destination, roomNr);
-    }
-
-    private void handleBook(){
-        String hotel = hotelchainChoiceBox.getValue();
-        String destination = destinationChoiceBox.getValue();
-        String roomNumber = roomNumberChoiceBox.getValue();
-        int guestCount = Integer.parseInt(guestTextField.getText());
-
-        try {
-            StringBuilder content = room.checkAvailability(hotel, destination, roomNumber);
-            if (room.getRoomFound()) {
-                room.calculateTotalPrice(guestCount, guestCount);
-                bookingInformationTextArea.setText(content.toString());
-            } else {
-                bookingInformationTextArea.setText("Room was not found, no room was booked.");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            bookingInformationTextArea.setText("An error occured: " + e.getMessage());
-        }
-        //this.refreshRoomInfo();
     }
 
     @FXML 

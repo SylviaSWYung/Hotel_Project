@@ -104,11 +104,21 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: FFCDEA;">
                      <children>
-                        <TextArea fx:id="bookingConfirmationTextArea" layoutX="20.0" layoutY="22.0" prefHeight="429.0" prefWidth="416.0" promptText="Booking Confirmation ">
+                        <TextArea fx:id="bookingConfirmationTextArea" layoutX="20.0" layoutY="22.0" prefHeight="334.0" prefWidth="416.0" promptText="Booking Confirmation ">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </TextArea>
+                        <Button layoutX="260.0" layoutY="384.0" mnemonicParsing="false" style="-fx-background-color: BC7FCD;" text="Save to file">
+                           <font>
+                              <Font size="21.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="67.0" layoutY="384.0" mnemonicParsing="false" style="-fx-background-color: BC7FCD;" text="Open File">
+                           <font>
+                              <Font size="21.0" />
+                           </font>
+                        </Button>
                      </children>
                   </AnchorPane>
               </content>
