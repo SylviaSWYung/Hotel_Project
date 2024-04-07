@@ -76,10 +76,10 @@ public class Room {
 
     //metode for å regne ut total pris på reisen (ganger pris på valgt hotell/rom/sted ganget med antall gjester)
     public void calculateTotalPrice(int price, int numGuests) throws IOException {
-    int totalPrice = price * numGuests;
-    System.out.println("Total price for booking: " + totalPrice + " kr.");
-    reWrite(content);
-}
+        int totalPrice = price * numGuests;
+        System.out.println("Total price for booking: " + totalPrice + " kr.");
+        reWrite(content);
+    }
 
     /*Metode: Sjekke om spesifikk info om hotellet er tilgjengelig for booking*/
     public StringBuilder checkAvailability(String chain, String destination, String roomNr) throws IOException{    //Kaster fileNotFoundException for å benytte scanner
@@ -100,15 +100,11 @@ public class Room {
                 if (availability) {                                              //Dersom availability som er index 4 i string, er true. Fortsett
                     System.out.println("This room is available.");              //Rommet er tilgjengelig
                     availability = false;                                  //Henter mer information fra bookOpinion()
-                    // if(availability){                                           //Dersom den er false altså kunde ønsker å booke, gjør så dette
-                    availability = bookOpinion();                                  //Henter mer information fra bookOpinion()
                     if(!availability){                                           //Dersom den er false altså kunde ønsker å booke, gjør så dette
                         int numGuests = guestAmount();
                         calculateTotalPrice(price, numGuests);
                         System.out.println("Your room has been successfully booked!");
-                    // }else{                                                        //Dersom kunde ikke ønsker å booke
-                    //     System.out.println("You did not book this room.");
-                    // }
+                    }
                 }else{                                                          //Dersom rommet fra før er false. 
                     System.out.println("This room is unavailable. Try another room or date");
                 }

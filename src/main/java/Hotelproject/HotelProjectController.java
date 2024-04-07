@@ -5,10 +5,7 @@ import java.time.LocalDate;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-<<<<<<< HEAD
-=======
 import javafx.scene.control.Alert.AlertType;
->>>>>>> e67ae0fff2fbebca9adaa2af226070d720989b1d
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -91,7 +88,7 @@ public class HotelProjectController {
             return;
         }
         this.room.booking(chain, destination, roomNr);
-        }
+    }
 
 
     @FXML
@@ -101,6 +98,8 @@ public class HotelProjectController {
         String roomNr = this.roomNumberChoiceBox.getValue();
 
         this.room.cancelBooking(chain, destination, roomNr);
+    }
+
     private void handleBook(){
         String hotel = hotelchainChoiceBox.getValue();
         String destination = destinationChoiceBox.getValue();
@@ -153,8 +152,4 @@ public class HotelProjectController {
     }
 
     
-
-
-    
-
 }
