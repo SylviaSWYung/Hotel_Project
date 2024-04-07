@@ -71,6 +71,7 @@ public class HotelProjectController {
         String chain = this.hotelchainChoiceBox.getValue();
         String destination = this.destinationChoiceBox.getValue();
         String roomNr = this.roomNumberChoiceBox.getValue();
+        //Integer guestInteger = Integer.parseInt(this.guestTextField.getText());
 
         String wrong = null; 
         if(chain == null){
@@ -79,6 +80,8 @@ public class HotelProjectController {
             wrong = "You have to choose a destination";
         }else if(roomNr == null){
             wrong = "You have to choose a room number";
+        // }else if(guestInteger <= 0){
+        //     wrong = "You have to choose amount of guest!";
         }
 
         try {
@@ -110,6 +113,9 @@ public class HotelProjectController {
             
             alert.showAndWait();
         }
+        this.room.booking(chain, destination, roomNr);
+        //this.refreshRoomInfo();
+
     }
 
 
