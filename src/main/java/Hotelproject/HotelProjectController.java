@@ -50,10 +50,10 @@ public class HotelProjectController {
         String roomNumber = roomNumberChoiceBox.getValue();
         int guestCount = Integer.parseInt(guestTextField.getText());
         LocalDate date = LocalDate.now();
-        //int totalprice = 
+        //int totalprice =
     
-        StringBuilder builder = new StringBuilder("Booking Information:\n");
-        builder.append("Date: ").append(date).append("\n");
+        StringBuilder builder = new StringBuilder("Booking Information:\n\n");
+        builder.append("Date: ").append(date).append("\n\n");
         builder.append("Hotel Chain: ").append(hotelchain).append("\n");
         builder.append("Destination: ").append(destination).append("\n");
         builder.append("Room Number: ").append(roomNumber).append("\n");
@@ -90,8 +90,6 @@ public class HotelProjectController {
                 wrong = "Invalid number of guests";
             }
         }
-
-        try {
             if(wrong != null){
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
@@ -100,13 +98,19 @@ public class HotelProjectController {
                 alert.showAndWait();
                 return;
             }
+
+        try {
+            int price = room.getPrice(chain, destination, roomNr);
+            int guestInput = Integer.parseInt(guestInteger);
+            int totalPrice = Betaling.calculateTotalPrice(price, guestInput);
+
             this.room.booking(chain, destination, roomNr);
             this.refreshBookingInfo();
     
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Confirmation");
             alert.setHeaderText("You have successfully booked!");
-            alert.setContentText("Booking information is updated.");
+            alert.setContentText("Total price: " + totalPrice + ". Booking information is updated.");
             
             alert.showAndWait();
         } catch (IOException e) {
@@ -135,14 +139,51 @@ public class HotelProjectController {
     }
 
     @FXML 
-    private void handleVippsPayment(){
-        gjennomforbetalingvipps(price, guestInput, totalPrice);
+    private void handleVippsPayment() throws IOException{
+
+        String chain = this.hotelchainChoiceBox.getValue();
+        String destination = this.destinationChoiceBox.getValue();
+        String roomNr = this.roomNumberChoiceBox.getValue();
+        String guestInteger = this.guestTextField.getText();
+
+        System.out.println("Selected chain: " + chain);
+        System.out.println("Selected destination: " + destination);
+        System.out.println("Selected room number: " + roomNr);
+        System.out.println("Guests: " + guestInteger);
+
+        int price = room.getPrice(chain, destination, roomNr);
+
+        System.out.println("Price per room: " + price);
+
+        int guestInput = Integer.parseInt(guestInteger);
+        int totalPrice = Betaling.calculateTotalPrice(price, guestInput);
+
+        vippsBetaling payment = new vippsBetaling();
+        payment.gjennomforbetalingvipps(price, guestInput, totalPrice);
     }
     
     @FXML
-    private void handleCardPayment(){
-        gjennomforbetalingcard(price, guestInput, totalPrice);
-    }
+    private void handleCardPayment() throws IOException{
 
+        String chain = this.hotelchainChoiceBox.getValue();
+        String destination = this.destinationChoiceBox.getValue();
+        String roomNr = this.roomNumberChoiceBox.getValue();
+        String guestInteger = this.guestTextField.getText();
+
+        System.out.println("Selected chain: " + chain);
+        System.out.println("Selected destination: " + destination);
+        System.out.println("Selected room number: " + roomNr);
+        System.out.println("Guests: " + guestInteger);
+
+        int price = room.getPrice(chain, destination, roomNr);
+
+        System.out.println("Price per room: " + price);
+
+        int guestInput = Integer.parseInt(guestInteger);
+        int totalPrice = Betaling.calculateTotalPrice(price, guestInput);
+
+        cardBetaling payment = new cardBetaling();
+        payment.gjennomforbetalingcard(price, guestInput, totalPrice);
+    }
     
 }

@@ -12,8 +12,8 @@ public class vippsBetaling implements Betaling {
             totalPrice = Betaling.calculateTotalPrice(price, guestInput);
             Alert alert = new Alert(AlertType.CONFIRMATION);
             alert.setTitle("Confirmation");
-            alert.setHeaderText("You have successfully paid the total amount of " + totalPrice + " by using Vipps");
-            alert.setContentText("Booking information is updated.");
+            alert.setHeaderText("Do you want to pay the total amount of " + totalPrice + " by using Vipps?");
+            alert.setContentText("You have successfully paid. Booking information is updated.");
             
             alert.showAndWait();
 

@@ -37,6 +37,29 @@ public class Room {
         
     }
 
+    public int getPrice(String chain, String destination, String roomNr) throws IOException {
+        int price = 0;
+
+        try (Scanner scanner = new Scanner(file)) {
+            while (scanner.hasNextLine()) {
+                String[] parts = scanner.nextLine().split(";");
+                String hotelchain = parts[0];
+                String place = parts[1];
+                String room = parts[2];
+                boolean availability = Boolean.parseBoolean(parts[3]);
+                int roomPrice = Integer.parseInt(parts[4]);
+
+                if (hotelchain.equalsIgnoreCase(chain) && place.equalsIgnoreCase(destination) && room.equals(roomNr)) {
+                    if (availability) {
+                        price = roomPrice;
+                    }
+                    break;
+                }
+            }
+        }
+        return price;
+    }
+
     public Scanner getScanner(){
         return scanner;
     }

@@ -61,7 +61,7 @@
                         <ChoiceBox fx:id="hotelchainChoiceBox" layoutX="152.0" layoutY="102.0" prefWidth="150.0" />
                         <ChoiceBox fx:id="destinationChoiceBox" layoutX="152.0" layoutY="159.0" prefWidth="150.0" />
                         <ChoiceBox fx:id="roomNumberChoiceBox" layoutX="152.0" layoutY="216.0" prefWidth="150.0" />
-                        <Label layoutX="39.0" layoutY="275.0" text="Guest">
+                        <Label layoutX="32.0" layoutY="275.0" prefHeight="18.0" prefWidth="107.0" text="Amount of Guest">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -71,7 +71,7 @@
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab text="Booking Information">
+          <Tab text="Booking Confirmation">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: FFCDEA;">
                      <children>
