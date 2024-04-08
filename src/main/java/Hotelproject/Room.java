@@ -83,7 +83,6 @@ public class Room {
 
     /*Metode: Sjekke om spesifikk info om hotellet er tilgjengelig for booking*/
     public StringBuilder checkAvailability(String chain, String destination, String roomNr) throws IOException{    //Kaster fileNotFoundException for å benytte scanner
-        StringBuilder content = new StringBuilder();
         while(scanner.hasNextLine()){                                           //Benytter en while loop for å hente informasjon fra hver linje
             String[] newRoomListe = scanner.nextLine().split(";");        //Linjen i filen, splitter dette med ; 
 
@@ -96,30 +95,21 @@ public class Room {
             //Dersom hotelchian = chain, place = destination, room = roomNr. 
             if(hotelchain.equalsIgnoreCase(chain) && place.equalsIgnoreCase(destination) && room.equalsIgnoreCase(roomNr)){
                 System.out.println("Booking information:\n Choosen hotel: " + chain + "\n Destination: "+ destination + "\n Room nr: " + roomNr);
-                if (availability) {                                             
-                    System.out.println("This room is available.");             
-                    System.out.println("Your room has been successfully booked!");
-                    availability = false;                                 
-                    // if(!availability){                                          
-                    //     //guestAmount(numGuests);
-                    //     calculateTotalPrice(price, numGuests);
-                    // }
-                // }else{                                                          //Dersom rommet fra før er false. 
-                //     System.out.println("This room is unavailable. Try another room or date");
-                }
+                availability = false; 
+                System.out.println("This room is available.");             
+                System.out.println("Your room has been successfully booked!");
             }
             //ny variabel, alle parameter join sammen med ; i midten, til en string. 
             String updatedLine = String.join(";", hotelchain, place, room, String.valueOf(availability), String.valueOf(price));
             content.append(updatedLine).append("\n");                       //content som er stringbuilder, legg updatedLine med \n inn.
         }
         //roomNotFound();                                                         //Dersom rommet ikke er funnet i HotelRoom.csv.                    
-        scanner.close();
+        //scanner.close();
         return content;
     }
 
     //Metode: Sjekke om spesifikk info om hotellet er sant, dermed avbestill. 
     public StringBuilder checkToCancelBooking(String chain, String destination, String roomNr) throws IOException{
-        StringBuilder content = new StringBuilder();
         while(scanner.hasNextLine()){                                           
             String[] newRoomListe = scanner.nextLine().split(";");        
 
@@ -131,18 +121,17 @@ public class Room {
 
             if(hotelchain.equalsIgnoreCase(chain) && place.equalsIgnoreCase(destination) && room.equalsIgnoreCase(roomNr)){
                 System.out.println("Booking Information: \n You choose to cancel booking for hotel " + chain + "\nat destination " + destination + "\nwith specific roomnr " + roomNr);
-                if (!availability) {                //Dersom availability fra csv er false --> indikerer at d r booket.
-                    availability = true;
-                    System.out.println("Your room has successfully been cancelled.\nWe hope to see you again!");
+                availability = true;
+                System.out.println("Your room has successfully been cancelled.\nWe hope to see you again!");
                 // }else{
                 //     System.out.println("There is nothing to cancel."); 
-                }
+                
             }
             String updatedLine = String.join(";", hotelchain, place, room, String.valueOf(availability), String.valueOf(price));
             content.append(updatedLine).append("\n");
         }
         //roomNotFound();
-        scanner.close();
+        //scanner.close();
         return content;
     }
 
@@ -155,9 +144,13 @@ public class Room {
     }
 
     public static void main(String[] args) throws IOException{
-        Room room1 = new Room();
-        room1.booking("Strawberry", "Trondheim", "2");
-        //room1.cancelBooking("scandic", "oslo", "4");
+        //Room room1 = new Room();
+        Room room2 = new Room();
+        //Room room3 = new Room();
+        //room2.booking("Scandic", "Oslo", "4");
+        //room3.booking("Scandic", "Oslo", "2");
+        //room1.booking("Scandic", "Oslo", "3");
+        room2.cancelBooking("Scandic", "oslo", "4");
 
     }
 }

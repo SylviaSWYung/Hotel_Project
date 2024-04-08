@@ -74,7 +74,7 @@ public class Roomv1 {
             content.append(updatedLine).append("\n");                       //content som er stringbuilder, legg updatedLine med \n inn.
         }
         roomNotFound();                                                         //Dersom rommet ikke er funnet i HotelRoom.csv.                    
-        scanner.close();
+        //scanner.close();
         return content;
     }
 
@@ -151,13 +151,15 @@ public class Roomv1 {
         writer.close();  
     }
     public static void main(String[] args) throws IOException{
-        //Room room1 = new Room();
+        Room room1 = new Room();
         //Room room2 = new Room();
         //Room room3 = new Room();
         //room1.booking("Strawberry", "Trondheim", "2");
         //room2.booking("Strawberry", "Trondheim", "2");
         //room3.booking("Scandic", "Trondheim", "3");
         //room1.cancelBooking("strawberry", "trondheim", "2");
+        room1.cancelBooking("Strawberry", "Trondheim", "2");
+
 
     }
 
