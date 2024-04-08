@@ -37,6 +37,29 @@ public class Room {
         
     }
 
+    public int getPrice(String chain, String destination, String roomNr) throws IOException {
+        int price = 0;
+
+        try (Scanner scanner = new Scanner(file)) {
+            while (scanner.hasNextLine()) {
+                String[] parts = scanner.nextLine().split(";");
+                String hotelchain = parts[0];
+                String place = parts[1];
+                String room = parts[2];
+                boolean availability = Boolean.parseBoolean(parts[3]);
+                int roomPrice = Integer.parseInt(parts[4]);
+
+                if (hotelchain.equalsIgnoreCase(chain) && place.equalsIgnoreCase(destination) && room.equals(roomNr)) {
+                    if (availability) {
+                        price = roomPrice;
+                    }
+                    break;
+                }
+            }
+        }
+        return price;
+    }
+
     public Scanner getScanner(){
         return scanner;
     }
@@ -113,7 +136,7 @@ public class Room {
             content.append(updatedLine).append("\n");                       //content som er stringbuilder, legg updatedLine med \n inn.
         }
         //roomNotFound();                                                         //Dersom rommet ikke er funnet i HotelRoom.csv.                    
-        scanner.close();
+        //scanner.close();
         return content;
     }
 
@@ -142,7 +165,7 @@ public class Room {
             content.append(updatedLine).append("\n");
         }
         //roomNotFound();
-        scanner.close();
+        //scanner.close();
         return content;
     }
 
@@ -156,8 +179,8 @@ public class Room {
 
     public static void main(String[] args) throws IOException{
         Room room1 = new Room();
-        room1.booking("Strawberry", "Trondheim", "2");
-        //room1.cancelBooking("scandic", "oslo", "4");
+        //room1.booking("Strawberry", "Trondheim", "2");
+        room1.cancelBooking("scandic", "oslo", "4");
 
     }
 }
