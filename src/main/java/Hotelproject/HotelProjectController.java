@@ -134,6 +134,7 @@ public class HotelProjectController {
         String chain = this.hotelchainChoiceBox.getValue();
         String destination = this.destinationChoiceBox.getValue();
         String roomNr = this.roomNumberChoiceBox.getValue();
+        System.out.println(chain);
 
         this.room.cancelBooking(chain, destination, roomNr);
     }
