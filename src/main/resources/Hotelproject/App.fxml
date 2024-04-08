@@ -105,7 +105,7 @@
                               <Font size="21.0" />
                            </font>
                         </Button>
-                        <Button layoutX="140.0" layoutY="418.0" mnemonicParsing="false" onAction="#handleCancelBooking" style="-fx-background-color: BC7FCD;" text="Cancel payment">
+                        <Button layoutX="140.0" layoutY="418.0" mnemonicParsing="false" onAction="#handleCancelBook" style="-fx-background-color: BC7FCD;" text="Cancel payment">
                            <font>
                               <Font size="21.0" />
                            </font></Button>

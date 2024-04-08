@@ -126,7 +126,7 @@ public class HotelProjectController {
 
 
     @FXML
-    private void handleCancelBooking() throws IOException{
+    private void handleCancelBook() throws IOException{
         String chain = this.hotelchainChoiceBox.getValue();
         String destination = this.destinationChoiceBox.getValue();
         String roomNr = this.roomNumberChoiceBox.getValue();
