@@ -30,9 +30,6 @@ public class HotelProjectController {
     @FXML
     private TextArea bookingInformationTextArea;
 
-    @FXML
-    private TextArea bookingConfirmationTextArea;
-
     @FXML   
     private void initialize() throws IOException{
         this.room = new Room();
@@ -104,7 +101,6 @@ public class HotelProjectController {
                 return;
             }
             this.room.booking(chain, destination, roomNr);
-            //this.BookingManager.addRoomInfo(room);
             this.refreshBookingInfo();
     
             Alert alert = new Alert(AlertType.INFORMATION);
@@ -140,12 +136,12 @@ public class HotelProjectController {
 
     @FXML 
     private void handleVippsPayment(){
-
+        gjennomforbetalingvipps(price, guestInput, totalPrice);
     }
     
     @FXML
     private void handleCardPayment(){
-
+        gjennomforbetalingcard(price, guestInput, totalPrice);
     }
 
     

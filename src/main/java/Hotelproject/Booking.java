@@ -71,7 +71,7 @@ public class Booking extends Room {
     //metode for å sjekke hvilken betalingsmetode brukeren velger:
     public static Betaling choosePaymentMethod(String betalingsmetode) {
         if (betalingsmetode.equals("cash")) {
-            return new cashBetaling();
+            return new vippsBetaling();
         } else if (betalingsmetode.equals("card")) {
             return new cardBetaling();
         } else {
