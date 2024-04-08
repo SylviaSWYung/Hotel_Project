@@ -30,9 +30,6 @@ public class HotelProjectController {
     @FXML
     private TextArea bookingInformationTextArea;
 
-    @FXML
-    private TextArea bookingConfirmationTextArea;
-
     @FXML   
     private void initialize() throws IOException{
         this.room = new Room();
@@ -71,7 +68,8 @@ public class HotelProjectController {
         String chain = this.hotelchainChoiceBox.getValue();
         String destination = this.destinationChoiceBox.getValue();
         String roomNr = this.roomNumberChoiceBox.getValue();
-        //Integer guestInteger = Integer.parseInt(this.guestTextField.getText());
+        String guestInteger = this.guestTextField.getText();
+        //Integer guestInput = Integer.parseInt(guestTextField.getText()); gjør den om til string istedet for å sjekke om det er noe der i det hele tatt, så int etterpå fir å sjekke om det er valid tall
 
         String wrong = null; 
         if(chain == null){
@@ -80,8 +78,17 @@ public class HotelProjectController {
             wrong = "You have to choose a destination";
         }else if(roomNr == null){
             wrong = "You have to choose a room number";
-        // }else if(guestInteger <= 0){
-        //     wrong = "You have to choose amount of guest!";
+        }else if(guestInteger.isEmpty()){
+            wrong = "You have to choose the amount of guest!";
+        }else {
+            try {
+                int guestInput = Integer.parseInt(guestTextField.getText());
+                if (guestInput <= 0) {
+                    wrong = "Invalid number of guests.";
+                }
+            } catch (NumberFormatException e) {
+                wrong = "Invalid number of guests";
+            }
         }
 
         try {
@@ -94,7 +101,6 @@ public class HotelProjectController {
                 return;
             }
             this.room.booking(chain, destination, roomNr);
-            //this.BookingManager.addRoomInfo(room);
             this.refreshBookingInfo();
     
             Alert alert = new Alert(AlertType.INFORMATION);
@@ -130,12 +136,12 @@ public class HotelProjectController {
 
     @FXML 
     private void handleVippsPayment(){
-
+        gjennomforbetalingvipps(price, guestInput, totalPrice);
     }
     
     @FXML
     private void handleCardPayment(){
-
+        gjennomforbetalingcard(price, guestInput, totalPrice);
     }
 
     

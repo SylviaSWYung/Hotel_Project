@@ -1,6 +1,11 @@
 package Hotelproject;
 
+import java.io.IOException;
+
 public interface Betaling {
 
-    void gjennomforBetaling(double belop);  //lager felles metode for både cash og card
+    static int calculateTotalPrice(int price, int guestInput) throws IOException {
+        return price * guestInput;
+    }
+
 }

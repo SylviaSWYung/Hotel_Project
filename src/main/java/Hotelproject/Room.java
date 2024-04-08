@@ -75,11 +75,11 @@ public class Room {
     // }
 
     //metode for å regne ut total pris på reisen (ganger pris på valgt hotell/rom/sted ganget med antall gjester)
-    public void calculateTotalPrice(int price, int numGuests) throws IOException {
-        int totalPrice = price * numGuests;
-        System.out.println("Total price for booking: " + totalPrice + " kr.");
-        reWrite(content); 
-    }
+    // public void calculateTotalPrice(int price, int numGuests) throws IOException {
+    //     int totalPrice = price * numGuests;
+    //     System.out.println("Total price for booking: " + totalPrice + " kr.");
+    //     reWrite(content); 
+    // }
 
     /*Metode: Sjekke om spesifikk info om hotellet er tilgjengelig for booking*/
     public StringBuilder checkAvailability(String chain, String destination, String roomNr) throws IOException{    //Kaster fileNotFoundException for å benytte scanner
