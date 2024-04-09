@@ -90,24 +90,14 @@
                               <Font size="14.0" />
                            </font>
                         </Button>
-                        <Button layoutX="85.0" layoutY="361.0" mnemonicParsing="false" style="-fx-background-color: BC7FCD;" text="Open File">
-                           <font>
-                              <Font size="21.0" />
-                           </font>
-                        </Button>
                         <Label layoutX="191.0" layoutY="221.0" text="Payment">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <Button layoutX="259.0" layoutY="361.0" mnemonicParsing="false" style="-fx-background-color: BC7FCD;" text="Save to file">
+                        <Button layoutX="165.0" layoutY="414.0" mnemonicParsing="false" onAction="#handleCancelBook" style="-fx-background-color: BC7FCD;" text="Cancel payment">
                            <font>
-                              <Font size="21.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="140.0" layoutY="418.0" mnemonicParsing="false" onAction="#handleCancelBook" style="-fx-background-color: BC7FCD;" text="Cancel payment">
-                           <font>
-                              <Font size="21.0" />
+                              <Font size="15.0" />
                            </font></Button>
                      </children>
                   </AnchorPane>

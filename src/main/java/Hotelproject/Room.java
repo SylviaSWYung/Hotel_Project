@@ -83,10 +83,12 @@ public class Room {
 
             //Dersom hotelchian = chain, place = destination, room = roomNr. 
             if(hotelchain.equalsIgnoreCase(chain) && place.equalsIgnoreCase(destination) && room.equalsIgnoreCase(roomNr)){
-                System.out.println("Booking information:\n Choosen hotel: " + chain + "\n Destination: "+ destination + "\n Room nr: " + roomNr);
-                availability = false; 
-                System.out.println("This room is available.");             
-                System.out.println("Your room has been successfully booked!");
+                if(availability){
+                    System.out.println("Booking information:\n Choosen hotel: " + chain + "\n Destination: "+ destination + "\n Room nr: " + roomNr);
+                    availability = false; 
+                    System.out.println("This room is available.");             
+                    System.out.println("Your room has been successfully booked!"); 
+                }
             }
             //ny variabel, alle parameter join sammen med ; i midten, til en string. 
             String updatedLine = String.join(";", hotelchain, place, room, String.valueOf(availability), String.valueOf(price));
