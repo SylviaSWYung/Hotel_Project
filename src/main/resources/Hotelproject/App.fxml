@@ -61,7 +61,7 @@
                         <ChoiceBox fx:id="hotelchainChoiceBox" layoutX="152.0" layoutY="102.0" prefWidth="150.0" />
                         <ChoiceBox fx:id="destinationChoiceBox" layoutX="152.0" layoutY="159.0" prefWidth="150.0" />
                         <ChoiceBox fx:id="roomNumberChoiceBox" layoutX="152.0" layoutY="216.0" prefWidth="150.0" />
-                        <Label layoutX="32.0" layoutY="275.0" prefHeight="18.0" prefWidth="107.0" text="Amount of Guest">
+                        <Label layoutX="32.0" layoutY="275.0" prefHeight="18.0" prefWidth="107.0" text="Amount of Guests">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -75,27 +75,27 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: FFCDEA;">
                      <children>
-                        <TextArea fx:id="bookingInformationTextArea" layoutX="14.0" layoutY="14.0" prefHeight="190.0" prefWidth="429.0" promptText="Booking Information here">
+                        <TextArea fx:id="bookingInformationTextArea" layoutX="15.0" layoutY="14.0" prefHeight="272.0" prefWidth="429.0" promptText="Booking Information here">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </TextArea>
-                        <Button layoutX="144.0" layoutY="260.0" mnemonicParsing="false" onAction="#handleVippsPayment" prefHeight="43.0" prefWidth="73.0" style="-fx-background-color: BC7FCD;" text="Vipps">
+                        <Button layoutX="129.0" layoutY="354.0" mnemonicParsing="false" onAction="#handleVippsPayment" prefHeight="43.0" prefWidth="73.0" style="-fx-background-color: BC7FCD;" text="Vipps">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Button>
-                        <Button layoutX="239.0" layoutY="260.0" mnemonicParsing="false" onAction="#handleCardPayment" prefHeight="43.0" prefWidth="73.0" style="-fx-background-color: BC7FCD;" text="Card">
+                        <Button layoutX="248.0" layoutY="354.0" mnemonicParsing="false" onAction="#handleCardPayment" prefHeight="43.0" prefWidth="73.0" style="-fx-background-color: BC7FCD;" text="Card">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Button>
-                        <Label layoutX="191.0" layoutY="221.0" text="Payment">
+                        <Label layoutX="189.0" layoutY="319.0" prefHeight="23.0" prefWidth="80.0" text="Payment">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <Button layoutX="165.0" layoutY="414.0" mnemonicParsing="false" onAction="#handleCancelBook" style="-fx-background-color: BC7FCD;" text="Cancel payment">
+                        <Button layoutX="165.0" layoutY="414.0" mnemonicParsing="false" onAction="#handleCancelBook" style="-fx-background-color: BC7FCD;" text="Cancel Booking">
                            <font>
                               <Font size="15.0" />
                            </font></Button>

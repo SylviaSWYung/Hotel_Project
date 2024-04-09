@@ -74,7 +74,13 @@ public class RoomTest {
 
     @Test
     @DisplayName("Betale to ganger, men få en feilmelding")
-    public void testDoublePayment(){
+    public void testDoublePayment() throws IOException {
+        room.booking("Strawberry", "Oslo", "3");
 
+        room.handleVippsPayment();
+        assertTrue(room.isVippsPaid());
+
+        assertThrows(IOException.class, () -> room.handleVippsPayment());
+        fail("Double payment should not be allowed.");
     }
 }

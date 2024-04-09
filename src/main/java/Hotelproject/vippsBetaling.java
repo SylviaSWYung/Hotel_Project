@@ -13,7 +13,7 @@ public class vippsBetaling implements Betaling {
             totalPrice = Betaling.calculateTotalPrice(price, guestInput);
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Confirmation");
-            alert.setHeaderText("You have successfully paid the total amount of " + totalPrice + " by using Vipps.");
+            alert.setHeaderText("You have successfully paid the total amount of " + totalPrice + "kr by using Vipps.");
             alert.setContentText("Booking information is updated.");
             
             alert.showAndWait();
@@ -23,7 +23,7 @@ public class vippsBetaling implements Betaling {
 
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Error");
-            alert.setHeaderText("Could not pay the amount " + totalPrice + "by using Vipps");
+            alert.setHeaderText("Could not pay the amount " + totalPrice + "kr by using Vipps");
             alert.setContentText("A problem occurred while trying to pay: " + e.getMessage());
             
             alert.showAndWait();

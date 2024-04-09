@@ -16,11 +16,21 @@ public class Room {
     private Scanner scanner; 
     private File file; 
     private boolean isItBooked;
+    private boolean isVippsPaid = false;
+    private boolean isCardPaid = false;
 
 
     public Room() throws IOException{
         this.file = new File("HotelRoom.csv");                      //Henter file    
         this.isItBooked = false;
+    }
+
+    public boolean isVippsPaid() {
+        return isVippsPaid;
+    }
+
+    public boolean isCardPaid() {
+        return isCardPaid;
     }
 
     public int getPrice(String chain, String destination, String roomNr) throws IOException {
@@ -96,6 +106,9 @@ public class Room {
         StringBuilder content = checkToCancelBooking(chain, destination, roomNr);
         reWrite(content);
         isItBooked = false;
+        isVippsPaid = false;
+        isCardPaid = false;
+
     }
 
     /*Metode: Sjekke om spesifikk info om hotellet er tilgjengelig for booking*/
@@ -175,6 +188,20 @@ public class Room {
             }
         }
         return false;
+    }
+
+    public void handleVippsPayment() throws IOException {
+        if (isVippsPaid) {
+            throw new IOException("You have already paid for the booking.");
+        }
+        isVippsPaid = true;
+    }
+
+    public void handleCardPayment() throws IOException {
+        if (isCardPaid) {
+            throw new IOException("You have already paid for the booking.");
+        }
+        isCardPaid = true;
     }
 
     public static void main(String[] args) throws IOException{

@@ -14,6 +14,7 @@ import javafx.util.converter.IntegerStringConverter;
 public class HotelProjectController {
     private Room room;
     private boolean isBooked = false;
+    private boolean isCancelled = false;
 
     @FXML
     private ChoiceBox<String> hotelchainChoiceBox;
@@ -59,14 +60,24 @@ public class HotelProjectController {
         int guestInput = Integer.parseInt(guestInteger);
         int totalPrice = Betaling.calculateTotalPrice(price, guestInput);
 
+        boolean isVippsPaid = room.isVippsPaid();
+        boolean isCardPaid = room.isCardPaid();
     
         StringBuilder builder = new StringBuilder("Booking Information:\n\n");
-        builder.append("Date: ").append(date).append("\n\n");
-        builder.append("Hotel Chain: ").append(hotelchain).append("\n");
-        builder.append("Destination: ").append(destination).append("\n");
-        builder.append("Room Number: ").append(roomNumber).append("\n");
-        builder.append("Amount of Guests: ").append(guestCount).append("\n");
-        builder.append("\nTotal price: ").append(totalPrice).append("\n");
+
+        if(!isCancelled) {
+            builder.append("Date: ").append(date).append("\n\n");
+            builder.append("Hotel Chain: ").append(hotelchain).append("\n");
+            builder.append("Destination: ").append(destination).append("\n");
+            builder.append("Room Number: ").append(roomNumber).append("\n");
+            builder.append("Amount of Guests: ").append(guestCount).append("\n");
+            builder.append("\nTotal price: ").append(totalPrice + "kr").append("\n");
+
+            builder.append("\nPayment\n");
+            builder.append("status: ").append(isVippsPaid || isCardPaid ? "Paid" : "Not paid").append("\n");
+        } else {
+            builder.append("Booking cancelled.");
+        }
 
         this.bookingInformationTextArea.setText(builder.toString());
     }
@@ -117,6 +128,8 @@ public class HotelProjectController {
             alert.showAndWait();
 
             isBooked = true;
+            isCancelled = false;
+            refreshBookingInfo();
 
         } catch (IOException e) {
             Alert alert = new Alert(AlertType.ERROR);
@@ -169,12 +182,15 @@ public class HotelProjectController {
             
             this.room.cancelBooking(chain, destination, roomNr);
             isBooked = false; 
+            isCancelled = true;
 
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Cancellation");
             alert.setHeaderText("You have successfully cancelled the booking!");
             alert.setContentText("You can now book another room! \nHave a nice day");
             alert.showAndWait(); 
+            refreshBookingInfo();
+
         }catch(IOException e){
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Error");
@@ -187,51 +203,75 @@ public class HotelProjectController {
     @FXML 
     private void handleVippsPayment() throws IOException{
 
-        String chain = this.hotelchainChoiceBox.getValue();
-        String destination = this.destinationChoiceBox.getValue();
-        String roomNr = this.roomNumberChoiceBox.getValue();
-        String guestInteger = this.guestTextField.getText();
-
-        System.out.println(room);
-        int price = room.getPrice(chain, destination, roomNr);
-        System.out.println("Price per room: " + price);
-
-        System.out.println("Selected chain: " + chain);
-        System.out.println("Selected destination: " + destination);
-        System.out.println("Selected room number: " + roomNr);
-        System.out.println("Guests: " + guestInteger);
-
-
-        int guestInput = Integer.parseInt(guestInteger);
-        int totalPrice = Betaling.calculateTotalPrice(price, guestInput);
+        try {
+            room.handleVippsPayment();
+            room.handleCardPayment();
+            String chain = this.hotelchainChoiceBox.getValue();
+            String destination = this.destinationChoiceBox.getValue();
+            String roomNr = this.roomNumberChoiceBox.getValue();
+            String guestInteger = this.guestTextField.getText();
     
+            System.out.println(room);
+            int price = room.getPrice(chain, destination, roomNr);
+            System.out.println("Price per room: " + price);
+    
+            System.out.println("Selected chain: " + chain);
+            System.out.println("Selected destination: " + destination);
+            System.out.println("Selected room number: " + roomNr);
+            System.out.println("Guests: " + guestInteger);
+    
+    
+            int guestInput = Integer.parseInt(guestInteger);
+            int totalPrice = Betaling.calculateTotalPrice(price, guestInput);
+        
+    
+            vippsBetaling payment = new vippsBetaling();
+            payment.gjennomforbetalingvipps(price, guestInput, totalPrice);
+            refreshBookingInfo();
 
-        vippsBetaling payment = new vippsBetaling();
-        payment.gjennomforbetalingvipps(price, guestInput, totalPrice);
+        } catch (IOException e) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Payment failed, you have already paid.");
+            alert.setContentText("An error occurred while trying to pay: " + e.getMessage());
+            alert.showAndWait();
+        }
     }
     
     @FXML
     private void handleCardPayment() throws IOException{
 
-        String chain = this.hotelchainChoiceBox.getValue();
-        String destination = this.destinationChoiceBox.getValue();
-        String roomNr = this.roomNumberChoiceBox.getValue();
-        String guestInteger = this.guestTextField.getText();
+        try {
+            room.handleCardPayment();
+            room.handleVippsPayment();
+            String chain = this.hotelchainChoiceBox.getValue();
+            String destination = this.destinationChoiceBox.getValue();
+            String roomNr = this.roomNumberChoiceBox.getValue();
+            String guestInteger = this.guestTextField.getText();
+    
+            System.out.println("Selected chain: " + chain);
+            System.out.println("Selected destination: " + destination);
+            System.out.println("Selected room number: " + roomNr);
+            System.out.println("Guests: " + guestInteger);
+    
+            int price = room.getPrice(chain, destination, roomNr);
+    
+            System.out.println("Price per room: " + price);
+    
+            int guestInput = Integer.parseInt(guestInteger);
+            int totalPrice = Betaling.calculateTotalPrice(price, guestInput);
+    
+            cardBetaling payment = new cardBetaling();
+            payment.gjennomforbetalingcard(price, guestInput, totalPrice);
+            this.refreshBookingInfo();
 
-        System.out.println("Selected chain: " + chain);
-        System.out.println("Selected destination: " + destination);
-        System.out.println("Selected room number: " + roomNr);
-        System.out.println("Guests: " + guestInteger);
-
-        int price = room.getPrice(chain, destination, roomNr);
-
-        System.out.println("Price per room: " + price);
-
-        int guestInput = Integer.parseInt(guestInteger);
-        int totalPrice = Betaling.calculateTotalPrice(price, guestInput);
-
-        cardBetaling payment = new cardBetaling();
-        payment.gjennomforbetalingcard(price, guestInput, totalPrice);
+        } catch (IOException e) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Payment failed, you have already paid.");
+            alert.setContentText("An error occurred while trying to pay: " + e.getMessage());
+            alert.showAndWait();
+        }
     }
     
 }
