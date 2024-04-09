@@ -186,8 +186,6 @@ public class HotelProjectController {
         int price = room.getPrice(chain, destination, roomNr);
         System.out.println("Price per room: " + price);
 
-        this.room.booking(chain, destination, roomNr);
-
         System.out.println("Selected chain: " + chain);
         System.out.println("Selected destination: " + destination);
         System.out.println("Selected room number: " + roomNr);
