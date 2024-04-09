@@ -24,17 +24,12 @@ public class Room {
     public static final List<String> ROOMNUMBER = List.of("1", "2", "3", "4");
 
     private Scanner scanner; 
-    private StringBuilder content;
     private File file; 
     //private boolean roomFound;
 
 
     public Room() throws IOException{
-        this.file = new File("HotelRoom.csv");                      //Henter filen
-        this.scanner = new Scanner(file);                                    //Henter info fra HotelRoom.csv, vha Scanner 
-        this.content = new StringBuilder();                                  //Benytter Stringbuilder for senere anledning, når vi skal redigere filen. 
-        //this.roomFound = false; 
-        
+        this.file = new File("HotelRoom.csv");                      //Henter file        
     }
 
     public int getPrice(String chain, String destination, String roomNr) throws IOException {
@@ -60,13 +55,10 @@ public class Room {
         return price;
     }
 
-    public Scanner getScanner(){
-        return scanner;
-    }
-
-    public StringBuilder getContent(){
-        return content;
-    }
+    // public StringBuilder getContent(){
+    //     return content;
+    //     this.file = new File("HotelRoom.csv");                      //Henter filen    
+    // }
 
     public File getFile(){
         return file;
@@ -78,8 +70,8 @@ public class Room {
 
     //Hovedmetode for booking
     public void booking(String chain, String destination, String roomNr) throws IOException{
-       StringBuilder content = checkAvailability(chain, destination, roomNr);
-       reWrite(content);
+        StringBuilder content = checkAvailability(chain, destination, roomNr);
+        reWrite(content);
     }
     
     //Hovedmetode for å avbestille booking
@@ -106,6 +98,8 @@ public class Room {
 
     /*Metode: Sjekke om spesifikk info om hotellet er tilgjengelig for booking*/
     public StringBuilder checkAvailability(String chain, String destination, String roomNr) throws IOException{    //Kaster fileNotFoundException for å benytte scanner
+        this.scanner = new Scanner(file);
+        StringBuilder content = new StringBuilder();
         while(scanner.hasNextLine()){                                           //Benytter en while loop for å hente informasjon fra hver linje
             String[] newRoomListe = scanner.nextLine().split(";");        //Linjen i filen, splitter dette med ; 
 
@@ -117,22 +111,26 @@ public class Room {
 
             //Dersom hotelchian = chain, place = destination, room = roomNr. 
             if(hotelchain.equalsIgnoreCase(chain) && place.equalsIgnoreCase(destination) && room.equalsIgnoreCase(roomNr)){
-                System.out.println("Booking information:\n Choosen hotel: " + chain + "\n Destination: "+ destination + "\n Room nr: " + roomNr);
-                availability = false; 
-                System.out.println("This room is available.");             
-                System.out.println("Your room has been successfully booked!");
+                if(availability){
+                    System.out.println("Booking information:\n Choosen hotel: " + chain + "\n Destination: "+ destination + "\n Room nr: " + roomNr);
+                    availability = false; 
+                    System.out.println("This room is available.");             
+                    System.out.println("Your room has been successfully booked!"); 
+                }
             }
             //ny variabel, alle parameter join sammen med ; i midten, til en string. 
             String updatedLine = String.join(";", hotelchain, place, room, String.valueOf(availability), String.valueOf(price));
             content.append(updatedLine).append("\n");                       //content som er stringbuilder, legg updatedLine med \n inn.
         }
         //roomNotFound();                                                         //Dersom rommet ikke er funnet i HotelRoom.csv.                    
-        //scanner.close();
+        scanner.close();
         return content;
     }
 
     //Metode: Sjekke om spesifikk info om hotellet er sant, dermed avbestill. 
     public StringBuilder checkToCancelBooking(String chain, String destination, String roomNr) throws IOException{
+        this.scanner = new Scanner(file);
+        StringBuilder content = new StringBuilder();
         while(scanner.hasNextLine()){                                           
             String[] newRoomListe = scanner.nextLine().split(";");        
 
@@ -154,7 +152,7 @@ public class Room {
             content.append(updatedLine).append("\n");
         }
         //roomNotFound();
-        //scanner.close();
+        scanner.close();
         return content;
     }
 
@@ -167,13 +165,11 @@ public class Room {
     }
 
     public static void main(String[] args) throws IOException{
-        //Room room1 = new Room();
         Room room2 = new Room();
-        //Room room3 = new Room();
-        //room2.booking("Scandic", "Oslo", "4");
-        //room3.booking("Scandic", "Oslo", "2");
-        //room1.booking("Scandic", "Oslo", "3");
-        room2.cancelBooking("Scandic", "oslo", "4");
+        //room2.booking("Strawberry", "trondheim", "3");
+        //room2.booking("Strawberry", "trondheim", "2");
+        room2.booking("Strawberry", "trondheim", "4");
+        room2.cancelBooking("Strawberry", "trondheim", "4");
 
     }
 }
