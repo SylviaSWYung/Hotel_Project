@@ -46,16 +46,12 @@ public class RoomTest {
 
     @Test
     @DisplayName("Booke to ganger, og få en feil melding")
-    public void testDoubleBooking(){
-        try{
-            room.booking("Strawberry", "Oslo", "4");
-            assertTrue(room.isRoomBooked("Strawberry", "Oslo", "4"));
+    public void testDoubleBooking() throws IOException{
+        room.booking("Strawberry", "Oslo", "4");
+        assertTrue(room.isRoomBooked("Strawberry", "Oslo", "4"));
 
-            room.booking("Scandic", "Oslo", "3");
-            fail("Double booking should not be allowed");
-        }catch(IOException e){
-
-        }
+        room.booking("Scandic", "Oslo", "3");
+        fail("Double booking should not be allowed");
     }
 
     @Test
@@ -68,8 +64,12 @@ public class RoomTest {
 
     @Test
     @DisplayName("Cancel, to ganger men få en feilmelding")
-    public void testDoubleCancel(){
+    public void testDoubleCancel() throws IOException{
+        room.booking("Strawberry", "Oslo", "3");
+        room.cancelBooking("Strawberry", "Oslo", "3"); 
 
+        room.cancelBooking("Strawberry", "Oslo", "3");
+        assertFalse(room.isRoomBooked("Strawberry", "Oslo", "3"));
     }
 
     @Test

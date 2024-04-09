@@ -73,12 +73,13 @@ public class HotelProjectController {
 
     @FXML
     private void handleBook() throws IOException{
-        String chain = this.hotelchainChoiceBox.getValue();
-        String destination = this.destinationChoiceBox.getValue();
-        String roomNr = this.roomNumberChoiceBox.getValue();
-        String guestInteger = this.guestTextField.getText();
         //Integer guestInput = Integer.parseInt(guestTextField.getText()); gjør den om til string istedet for å sjekke om det er noe der i det hele tatt, så int etterpå fir å sjekke om det er valid tall
         try{
+            String chain = this.hotelchainChoiceBox.getValue();
+            String destination = this.destinationChoiceBox.getValue();
+            String roomNr = this.roomNumberChoiceBox.getValue();
+            String guestInteger = this.guestTextField.getText();
+
             if(isBooked){
                 Alert alert = new Alert(AlertType.ERROR);
                 alert.setTitle("Error");
@@ -156,6 +157,15 @@ public class HotelProjectController {
             String chain = this.hotelchainChoiceBox.getValue();
             String destination = this.destinationChoiceBox.getValue();
             String roomNr = this.roomNumberChoiceBox.getValue();
+
+            if(!isBooked){
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("You have already cancelled");
+                alert.setContentText("You have already cancelled the room. You cannot cancel twice.");
+                alert.showAndWait();
+                return;
+            }
             
             this.room.cancelBooking(chain, destination, roomNr);
             isBooked = false; 

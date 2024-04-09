@@ -181,7 +181,8 @@ public class Room {
         Room room2 = new Room();
         //room2.booking("Strawberry", "trondheim", "3");
         //room2.booking("Strawberry", "trondheim", "2");
-        room2.booking("", "trondheim", "4");
+        room2.cancelBooking("Strawberry", "Trondheim", "4");
+        room2.cancelBooking("Strawberry", "Trondheim", "4");
         //room2.booking("Strawberry", "trondheim", "3");
         //room2.cancelBooking("Strawberry", "trondheim", "4");
 
