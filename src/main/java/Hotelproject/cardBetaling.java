@@ -8,7 +8,7 @@ import javafx.scene.control.Alert.AlertType;
 public class cardBetaling implements Betaling {
 
 
-    public static void gjennomforbetalingcard(int price, int guestInput, int totalPrice) throws IOException {
+    public void gjennomforbetalingcard(int price, int guestInput, int totalPrice) throws IOException {
         try {
             totalPrice = Betaling.calculateTotalPrice(price, guestInput);
             Alert alert = new Alert(AlertType.CONFIRMATION);

@@ -152,11 +152,11 @@ public class HotelProjectController {
         System.out.println("Guests: " + guestInteger);
 
         int price = room.getPrice(chain, destination, roomNr);
-
-        System.out.println("Price per room: " + price);
-
         int guestInput = Integer.parseInt(guestInteger);
         int totalPrice = Betaling.calculateTotalPrice(price, guestInput);
+        this.room.booking(chain, destination, roomNr);
+
+        System.out.println("Price per room: " + price);
 
         vippsBetaling payment = new vippsBetaling();
         payment.gjennomforbetalingvipps(price, guestInput, totalPrice);
