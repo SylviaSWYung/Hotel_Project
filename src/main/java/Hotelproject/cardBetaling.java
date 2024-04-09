@@ -11,10 +11,10 @@ public class cardBetaling implements Betaling {
     public void gjennomforbetalingcard(int price, int guestInput, int totalPrice) throws IOException {
         try {
             totalPrice = Betaling.calculateTotalPrice(price, guestInput);
-            Alert alert = new Alert(AlertType.CONFIRMATION);
+            Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Confirmation");
-            alert.setHeaderText("Do you want to pay the total amount of " + totalPrice + " by Card?");
-            alert.setContentText("You have successfully paid. Booking information is updated.");
+            alert.setHeaderText("You have successfully paid the total amount of " + totalPrice + " by Card.");
+            alert.setContentText("Booking information is updated.");
             
             alert.showAndWait();
 

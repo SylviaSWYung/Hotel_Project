@@ -3,6 +3,7 @@
 1. Beskrivelse av appen 
 - Huskeliste: Her skal dere gi en kort beskrivelse av appen dere har laget og hva den gjør (150-200 ord)
 
+
 2. Diagram
 - Vise et bilde av et diagram, enten klassediagram, objektdiagram, objekttilstandsdiagram eller sekvensdiagram. 
 - Vise en interessant/viktig del av appen! 

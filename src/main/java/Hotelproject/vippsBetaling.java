@@ -9,11 +9,12 @@ public class vippsBetaling implements Betaling {
 
     public void gjennomforbetalingvipps(int price, int guestInput, int totalPrice) throws IOException {
         try {
+            System.out.println("pris: " + price + " guestinput: " + guestInput);
             totalPrice = Betaling.calculateTotalPrice(price, guestInput);
-            Alert alert = new Alert(AlertType.CONFIRMATION);
+            Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Confirmation");
-            alert.setHeaderText("Do you want to pay the total amount of " + totalPrice + " by using Vipps?");
-            alert.setContentText("You have successfully paid. Booking information is updated.");
+            alert.setHeaderText("You have successfully paid the total amount of " + totalPrice + " by using Vipps.");
+            alert.setContentText("Booking information is updated.");
             
             alert.showAndWait();
 

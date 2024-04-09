@@ -45,7 +45,7 @@ public class Room {
                 int roomPrice = Integer.parseInt(parts[4]);
 
                 if (hotelchain.equalsIgnoreCase(chain) && place.equalsIgnoreCase(destination) && room.equals(roomNr)) {
-                    if (availability) {
+                    if (!availability) {
                         price = roomPrice;
                     }
                     break;

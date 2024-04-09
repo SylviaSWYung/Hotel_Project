@@ -44,12 +44,21 @@ public class HotelProjectController {
     
     }
 
-    private void refreshBookingInfo() {
+    private void refreshBookingInfo() throws IOException {
         String hotelchain = hotelchainChoiceBox.getValue();
         String destination = destinationChoiceBox.getValue();
         String roomNumber = roomNumberChoiceBox.getValue();
         int guestCount = Integer.parseInt(guestTextField.getText());
         LocalDate date = LocalDate.now();
+
+        String chain = this.hotelchainChoiceBox.getValue();
+        String roomNr = this.roomNumberChoiceBox.getValue();
+        String guestInteger = this.guestTextField.getText();
+
+        int price = room.getPrice(chain, destination, roomNr);
+        int guestInput = Integer.parseInt(guestInteger);
+        int totalPrice = Betaling.calculateTotalPrice(price, guestInput);
+
     
         StringBuilder builder = new StringBuilder("Booking Information:\n\n");
         builder.append("Date: ").append(date).append("\n\n");
@@ -57,7 +66,7 @@ public class HotelProjectController {
         builder.append("Destination: ").append(destination).append("\n");
         builder.append("Room Number: ").append(roomNumber).append("\n");
         builder.append("Amount of Guests: ").append(guestCount).append("\n");
-        //builder.append("\n Total price: ").append(totalprice).append("\n");
+        builder.append("\nTotal price: ").append(totalPrice).append("\n");
 
         this.bookingInformationTextArea.setText(builder.toString());
     }
@@ -84,6 +93,9 @@ public class HotelProjectController {
                 throw new IOException(wrong);
             }
             //int guestCount = Integer.parseInt(guestInteger);
+            // int price = room.getPrice(chain, destination, roomNr);
+            // int guestInput = Integer.parseInt(guestInteger);
+            // int totalPrice = Betaling.calculateTotalPrice(price, guestInput);
             this.room.booking(chain, destination, roomNr);
             this.refreshBookingInfo();
         
@@ -170,17 +182,21 @@ public class HotelProjectController {
         String roomNr = this.roomNumberChoiceBox.getValue();
         String guestInteger = this.guestTextField.getText();
 
+        System.out.println(room);
+        int price = room.getPrice(chain, destination, roomNr);
+        System.out.println("Price per room: " + price);
+
+        this.room.booking(chain, destination, roomNr);
+
         System.out.println("Selected chain: " + chain);
         System.out.println("Selected destination: " + destination);
         System.out.println("Selected room number: " + roomNr);
         System.out.println("Guests: " + guestInteger);
 
-        int price = room.getPrice(chain, destination, roomNr);
+
         int guestInput = Integer.parseInt(guestInteger);
         int totalPrice = Betaling.calculateTotalPrice(price, guestInput);
-        this.room.booking(chain, destination, roomNr);
-
-        System.out.println("Price per room: " + price);
+    
 
         vippsBetaling payment = new vippsBetaling();
         payment.gjennomforbetalingvipps(price, guestInput, totalPrice);
