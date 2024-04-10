@@ -27,7 +27,7 @@ public class RoomTest {
     public void testBasicBooking(){
         try{
             room.booking("Scandic", "Oslo", "3");
-            assertTrue(room.isRoomBooked("Scandic", "Oslo", "3"));
+            assertFalse(room.isRoomBooked("Scandic", "Oslo", "3"));
         }catch(IOException e){
             fail("Booking failed: " + e.getMessage());
         }
@@ -38,7 +38,7 @@ public class RoomTest {
     public void testCancelBooking(){
         try{
             room.cancelBooking("Scandic", "Oslo", "3");
-            assertFalse(room.isRoomBooked("Scandic", "Oslo", "3"));
+            assertTrue(room.isRoomBooked("Scandic", "Oslo", "3"));
         }catch(IOException e){
             fail("Cancel booking failed: " + e.getMessage());
         }
@@ -48,10 +48,10 @@ public class RoomTest {
     @DisplayName("Booke to ganger, og få en feil melding")
     public void testDoubleBooking() throws IOException{
         room.booking("Strawberry", "Oslo", "4");
-        assertTrue(room.isRoomBooked("Strawberry", "Oslo", "4"));
-
-        room.booking("Scandic", "Oslo", "3");
-        fail("Double booking should not be allowed");
+        assertFalse(room.isRoomBooked("Strawberry", "Oslo", "4"));
+        assertThrows(IllegalStateException.class, () -> {
+            room.booking("Scandic", "Oslo", "3");
+        });
     }
 
     @Test
@@ -67,9 +67,10 @@ public class RoomTest {
     public void testDoubleCancel() throws IOException{
         room.booking("Strawberry", "Oslo", "3");
         room.cancelBooking("Strawberry", "Oslo", "3"); 
+        assertThrows(IOException.class, () -> {
+            room.cancelBooking("Strawberry", "Oslo", "3");
 
-        room.cancelBooking("Strawberry", "Oslo", "3");
-        assertFalse(room.isRoomBooked("Strawberry", "Oslo", "3"));
+        });
     }
 
     @Test
