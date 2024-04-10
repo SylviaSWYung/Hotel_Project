@@ -1,5 +1,5 @@
 ﻿hotel;destination;roomnr;false;0
-Scandic;Oslo;1;true;300
+Scandic;Oslo;1;false;300
 Scandic;Oslo;2;true;400
 Scandic;Oslo;3;true;500
 Scandic;Oslo;4;true;600
@@ -10,8 +10,8 @@ Scandic;Trondheim;4;true;600
 Strawberry;Oslo;1;true;300
 Strawberry;Oslo;2;true;400
 Strawberry;Oslo;3;true;500
-Strawberry;Oslo;4;true;600
+Strawberry;Oslo;4;false;600
 Strawberry;Trondheim;1;true;300
 Strawberry;Trondheim;2;true;400
 Strawberry;Trondheim;3;true;500
-Strawberry;Trondheim;4;false;600
+Strawberry;Trondheim;4;true;600
