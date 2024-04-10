@@ -65,10 +65,10 @@ public class RoomTest {
     @Test
     @DisplayName("Cancel, to ganger men få en feilmelding")
     public void testDoubleCancel() throws IOException{
-        room.booking("Strawberry", "Oslo", "3");
-        room.cancelBooking("Strawberry", "Oslo", "3"); 
+        room.booking("Strawberry", "Oslo", "1");
+        room.cancelBooking("Strawberry", "Oslo", "1"); 
         assertThrows(IOException.class, () -> {
-            room.cancelBooking("Strawberry", "Oslo", "3");
+            room.cancelBooking("Strawberry", "Oslo", "1");
 
         });
     }
@@ -77,11 +77,8 @@ public class RoomTest {
     @DisplayName("Betale to ganger, men få en feilmelding")
     public void testDoublePayment() throws IOException {
         room.booking("Strawberry", "Oslo", "3");
-
         room.handleVippsPayment();
         assertTrue(room.isVippsPaid());
-
         assertThrows(IOException.class, () -> room.handleVippsPayment());
-        fail("Double payment should not be allowed.");
     }
 }
