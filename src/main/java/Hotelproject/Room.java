@@ -76,9 +76,9 @@ public class Room {
             throw new IllegalArgumentException("The provided room number does not exist.");
         }
         if(isItBooked){
-            throw new IOException("Another room is already booked. Cancel it before booking another room.");
+            throw new IllegalStateException("Another room is already booked. Cancel it before booking another room.");
         }
-        if(isRoomBooked(chain, destination, roomNr)){
+        if(!isRoomBooked(chain, destination, roomNr)){
             throw new IOException("Room is already booked");
         }
         StringBuilder content = checkAvailability(chain, destination, roomNr);
@@ -97,10 +97,10 @@ public class Room {
         if(!ROOMNUMBER.contains(roomNr)){
             throw new IllegalArgumentException("The provided room number does not exist.");
         }
-        if(!isItBooked){
-            throw new IOException("No room is booked to cancel");
-        }
-        if(!isRoomBooked(chain, destination, roomNr)){
+        // if(!isItBooked){
+        //     throw new IllegalStateException("No room is booked to cancel");
+        // }
+        if(isRoomBooked(chain, destination, roomNr)){
             throw new IOException("Room is not booked");
         }
         StringBuilder content = checkToCancelBooking(chain, destination, roomNr);
@@ -176,14 +176,14 @@ public class Room {
 
     public boolean isRoomBooked(String chain, String destination, String roomNr) throws FileNotFoundException{
         try(Scanner scanner = new Scanner(file)){
-            while(scanner.hasNext()){
+            while(scanner.hasNextLine()){
                 String [] parts = scanner.nextLine().split(";");
                 String hotelchain = parts[0];
                 String place = parts[1];
                 String room = parts[2];
                 boolean availability = Boolean.parseBoolean(parts[3]);
                 if(hotelchain.equalsIgnoreCase(chain) && place.equalsIgnoreCase(destination) && room.equalsIgnoreCase(roomNr)){
-                    return !availability;
+                    return availability;
                 }
             }
         }
@@ -202,16 +202,5 @@ public class Room {
             throw new IOException("You have already paid for the booking.");
         }
         isCardPaid = true;
-    }
-
-    public static void main(String[] args) throws IOException{
-        Room room2 = new Room();
-        //room2.booking("Strawberry", "trondheim", "3");
-        //room2.booking("Strawberry", "trondheim", "2");
-        room2.cancelBooking("Strawberry", "Trondheim", "4");
-        room2.cancelBooking("Strawberry", "Trondheim", "4");
-        //room2.booking("Strawberry", "trondheim", "3");
-        //room2.cancelBooking("Strawberry", "trondheim", "4");
-
     }
 }
