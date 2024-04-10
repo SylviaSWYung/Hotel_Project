@@ -84,7 +84,6 @@ public class HotelProjectController {
 
     @FXML
     private void handleBook() throws IOException{
-        //Integer guestInput = Integer.parseInt(guestTextField.getText()); gjør den om til string istedet for å sjekke om det er noe der i det hele tatt, så int etterpå fir å sjekke om det er valid tall
         try{
             String chain = this.hotelchainChoiceBox.getValue();
             String destination = this.destinationChoiceBox.getValue();
@@ -104,22 +103,9 @@ public class HotelProjectController {
             if(wrong != null){
                 throw new IOException(wrong);
             }
-            //int guestCount = Integer.parseInt(guestInteger);
-            // int price = room.getPrice(chain, destination, roomNr);
-            // int guestInput = Integer.parseInt(guestInteger);
-            // int totalPrice = Betaling.calculateTotalPrice(price, guestInput);
+       
             this.room.booking(chain, destination, roomNr);
             this.refreshBookingInfo();
-        
-            // if(wrong != null){
-            //     Alert alert = new Alert(Alert.AlertType.ERROR);
-            //     alert.setTitle("Error");
-            //     alert.setHeaderText("Couldn't book");
-            //     alert.setContentText(wrong);
-            //     alert.showAndWait();
-            //     return;
-            // }
-            
     
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Confirmation");

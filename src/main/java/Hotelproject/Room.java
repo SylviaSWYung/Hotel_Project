@@ -21,7 +21,7 @@ public class Room {
 
 
     public Room() throws IOException{
-        this.file = new File("HotelRoom.csv");                      //Henter file    
+        this.file = new File("src/main/java/Hotelproject/HotelRoom.csv");                      
         this.isItBooked = false;
     }
 
@@ -97,9 +97,6 @@ public class Room {
         if(!ROOMNUMBER.contains(roomNr)){
             throw new IllegalArgumentException("The provided room number does not exist.");
         }
-        // if(!isItBooked){
-        //     throw new IllegalStateException("No room is booked to cancel");
-        // }
         if(isRoomBooked(chain, destination, roomNr)){
             throw new IOException("Room is not booked");
         }
@@ -112,19 +109,18 @@ public class Room {
     }
 
     /*Metode: Sjekke om spesifikk info om hotellet er tilgjengelig for booking*/
-    public StringBuilder checkAvailability(String chain, String destination, String roomNr) throws IOException{    //Kaster fileNotFoundException for å benytte scanner
+    public StringBuilder checkAvailability(String chain, String destination, String roomNr) throws IOException{   
         this.scanner = new Scanner(file);
         StringBuilder content = new StringBuilder();
-        while(scanner.hasNextLine()){                                           //Benytter en while loop for å hente informasjon fra hver linje
-            String[] newRoomListe = scanner.nextLine().split(";");        //Linjen i filen, splitter dette med ; 
+        while(scanner.hasNextLine()){                                           
+            String[] newRoomListe = scanner.nextLine().split(";");       
 
-            String hotelchain = newRoomListe[0].trim();                         //ny variabel, fra nyRoomListe hent hotelchain. Trim whitespace
+            String hotelchain = newRoomListe[0].trim();                         
             String place = newRoomListe[1].trim();
             String room = newRoomListe[2].trim();
-            Boolean availability = Boolean.parseBoolean(newRoomListe[3].trim()); //Endrer til newRoomListe til en boolean
+            Boolean availability = Boolean.parseBoolean(newRoomListe[3].trim()); 
             int price = Integer.parseInt(newRoomListe[4].trim());
 
-            //Dersom hotelchian = chain, place = destination, room = roomNr. 
             if(hotelchain.equalsIgnoreCase(chain) && place.equalsIgnoreCase(destination) && room.equalsIgnoreCase(roomNr)){
                 if(availability){
                     System.out.println("Booking information:\n Choosen hotel: " + chain + "\n Destination: "+ destination + "\n Room nr: " + roomNr);
@@ -133,9 +129,8 @@ public class Room {
                     System.out.println("Your room has been successfully booked!"); 
                 }
             }
-            //ny variabel, alle parameter join sammen med ; i midten, til en string. 
             String updatedLine = String.join(";", hotelchain, place, room, String.valueOf(availability), String.valueOf(price));
-            content.append(updatedLine).append("\n");                       //content som er stringbuilder, legg updatedLine med \n inn.
+            content.append(updatedLine).append("\n");                       
         }
         scanner.close();
         return content;
@@ -169,11 +164,12 @@ public class Room {
 
     //Metode (generelt): Kode som skriver om alt i csv. 
     public void reWrite(StringBuilder x) throws IOException{
-        FileWriter writer = new FileWriter(file);           //Skriv i csv filen
-        writer.write(x.toString());                         //skriv content til string
+        FileWriter writer = new FileWriter(file);           
+        writer.write(x.toString());                        
         writer.close(); 
     }
 
+    //Metode: Sjekke om rommet er booket fra før.
     public boolean isRoomBooked(String chain, String destination, String roomNr) throws FileNotFoundException{
         try(Scanner scanner = new Scanner(file)){
             while(scanner.hasNextLine()){
@@ -190,6 +186,7 @@ public class Room {
         return false;
     }
 
+    //Metode: sjekke om vipps har blitt betalt fra før
     public void handleVippsPayment() throws IOException {
         if (isVippsPaid) {
             throw new IOException("You have already paid for the booking.");
@@ -197,6 +194,7 @@ public class Room {
         isVippsPaid = true;
     }
 
+    //Metode: Sjekke om card har blitt betalt fra før
     public void handleCardPayment() throws IOException {
         if (isCardPaid) {
             throw new IOException("You have already paid for the booking.");
