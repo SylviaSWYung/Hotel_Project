@@ -17,4 +17,4 @@ The final product must meet these key requirements:
 - **FXML and SceneBuilder:** Used for designing the app's UI, with integration into the app's logic through Controller.java.
 
 ## Image of the application 
-![Image of the hotel application](/Hotel_Project/src/pictures/Hotelproject.png)
+![Image of the hotel application](/src/pictures/Hotel_project.png)
